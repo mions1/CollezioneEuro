@@ -8,7 +8,13 @@ class CEFakeRepository : CERepositoryInterface {
         val SingleInstance = CEFakeRepository()
     }
 
-    private val countries: ArrayList<CECountry> = ArrayList()
+    private val countries: ArrayList<CECountry> = arrayListOf(
+        CECountry("Italia", CECountry.createCoins()),
+        CECountry("Spagna", CECountry.createCoins()),
+        CECountry("Grecia", CECountry.createCoins()),
+        CECountry("Germania", CECountry.createCoins()),
+        CECountry("Francia", CECountry.createCoins()),
+    )
 
     override suspend fun getCountries(): ArrayList<CECountry> {
         return countries
