@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llCoinSet1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/coin_1"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_2"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_3"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_4"
+            layout="@layout/include_coin" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCoinSet2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/coin_5"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_6"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_7"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_8"
+            layout="@layout/include_coin" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llCoinSet3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/coin_9"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_10"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_11"
+            layout="@layout/include_coin" />
+
+        <include
+            android:id="@+id/coin_12"
+            layout="@layout/include_coin" />
+
+    </LinearLayout>
+
+</LinearLayout>
