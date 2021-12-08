@@ -20,7 +20,9 @@
 
     <!-- TextView -->
     <style name="CETextViewHolderCountry" parent="CESubtitle">
-
+        <item name="android:paddingLeft">@dimen/CETextPaddingLeft</item>
+        <item name="android:paddingTop">@dimen/CETextPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/CETextPaddingBottom</item>
     </style>
 
 
