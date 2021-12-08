@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">CollezioneEuro</string>
+    <string name="holder_country_arrow_right_contentdescription">Go to details</string>
 </resources>

@@ -14,6 +14,16 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Country" />
 
+
+    <ImageView
+        style="@style/CEImageViewHolderCountry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/holder_country_arrow_right_contentdescription"
+        android:src="@drawable/arrow_right"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvCountry" />
+
     <View
         android:id="@+id/divider"
         style="@style/CEDividerHolderCountry"
