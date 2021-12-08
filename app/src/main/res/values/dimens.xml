@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="coin_image_width">100dp</dimen>
+    <dimen name="coin_image_height">100dp</dimen>
+
+    <dimen name="coin_text_width">@dimen/coin_image_width</dimen>
+
     <dimen name="CETextPaddingLeft">15dp</dimen>
     <dimen name="CETextPaddingTop">10dp</dimen>
     <dimen name="CETextPaddingBottom">10dp</dimen>

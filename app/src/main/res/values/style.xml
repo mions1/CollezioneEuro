@@ -25,6 +25,12 @@
         <item name="android:paddingBottom">@dimen/CETextHolderCountryPaddingBottom</item>
     </style>
 
+    <style name="CETextCoinCountryValueAtImageBottom" parent="CESubtitle">
+        <item name="android:layout_width">@dimen/coin_image_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAlignment">center</item>
+    </style>
+
 
     <!-- Other -->
     <style name="CEDividerHolderCountry">
@@ -37,6 +43,11 @@
         <item name="android:paddingRight">@dimen/CEImageViewHolderCountryPaddingRight</item>
         <item name="android:paddingTop">@dimen/CEImageViewHolderCountryPaddingTop</item>
         <item name="android:paddingBottom">@dimen/CEImageViewHolderCountryPaddingBottom</item>
+    </style>
+
+    <style name="CEImageViewCountryCoin">
+        <item name="android:layout_width">@dimen/coin_image_width</item>
+        <item name="android:layout_height">@dimen/coin_image_height</item>
     </style>
 
 </resources>

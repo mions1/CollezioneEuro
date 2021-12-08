@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/coin"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:visibility="gone"
     tools:visibility="visible">
 
     <ImageView
         android:id="@+id/ivCoin"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        style="@style/CEDividerHolderCountry"
+        android:layout_width="@dimen/coin_image_width"
+        android:layout_height="@dimen/coin_image_width"
         android:contentDescription="@string/coin_contentdescription"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -19,7 +20,7 @@
 
     <TextView
         android:id="@+id/tvValue"
-        android:layout_width="wrap_content"
+        style="@style/CETextCoinCountryValueAtImageBottom"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ivCoin"
