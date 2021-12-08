@@ -3,4 +3,13 @@
     <dimen name="CETextPaddingLeft">15dp</dimen>
     <dimen name="CETextPaddingTop">10dp</dimen>
     <dimen name="CETextPaddingBottom">10dp</dimen>
+
+    <dimen name="CETextHolderCountryPaddingLeft">@dimen/CETextPaddingLeft</dimen>
+    <dimen name="CETextHolderCountryPaddingTop">@dimen/CETextPaddingTop</dimen>
+    <dimen name="CETextHolderCountryPaddingBottom">@dimen/CETextPaddingBottom</dimen>
+
+    <dimen name="CEImageViewHolderCountryPaddingRight">@dimen/CETextPaddingLeft</dimen>
+    <dimen name="CEImageViewHolderCountryPaddingTop">@dimen/CETextHolderCountryPaddingTop</dimen>
+    <dimen name="CEImageViewHolderCountryPaddingBottom">@dimen/CETextHolderCountryPaddingBottom
+    </dimen>
 </resources>

@@ -20,9 +20,9 @@
 
     <!-- TextView -->
     <style name="CETextViewHolderCountry" parent="CESubtitle">
-        <item name="android:paddingLeft">@dimen/CETextPaddingLeft</item>
-        <item name="android:paddingTop">@dimen/CETextPaddingTop</item>
-        <item name="android:paddingBottom">@dimen/CETextPaddingBottom</item>
+        <item name="android:paddingLeft">@dimen/CETextHolderCountryPaddingLeft</item>
+        <item name="android:paddingTop">@dimen/CETextHolderCountryPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/CETextHolderCountryPaddingBottom</item>
     </style>
 
 
@@ -31,6 +31,12 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
         <item name="android:background">?android:attr/listDivider</item>
+    </style>
+
+    <style name="CEImageViewHolderCountry">
+        <item name="android:paddingRight">@dimen/CEImageViewHolderCountryPaddingRight</item>
+        <item name="android:paddingTop">@dimen/CEImageViewHolderCountryPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/CEImageViewHolderCountryPaddingBottom</item>
     </style>
 
 </resources>
