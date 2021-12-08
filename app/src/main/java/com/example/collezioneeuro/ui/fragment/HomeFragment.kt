@@ -61,7 +61,12 @@ class HomeFragment : Fragment(), CEContract.View {
     }
 
     private fun initRecyclerView() {
-        binding.rvCountries.adapter = CountriesAdapter(ceCountries)
+        binding.rvCountries.adapter =
+            CountriesAdapter(ceCountries, object : CountriesAdapter.OnClickListener {
+                override fun onClick(clicked: CECountry) {
+                    activityParent.replaceFragmentToCountryFragment(clicked)
+                }
+            })
     }
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
