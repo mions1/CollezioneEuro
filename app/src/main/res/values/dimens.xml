@@ -17,4 +17,5 @@
     <dimen name="CEImageViewHolderCountryPaddingTop">@dimen/CETextHolderCountryPaddingTop</dimen>
     <dimen name="CEImageViewHolderCountryPaddingBottom">@dimen/CETextHolderCountryPaddingBottom
     </dimen>
+    <dimen name="coin_owned_bar_height">4dp</dimen>
 </resources>
