@@ -12,6 +12,7 @@ import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentCountryBinding
 import com.example.collezioneeuro.databinding.IncludeCoinBinding
+import com.example.collezioneeuro.model.CECoin
 import com.example.collezioneeuro.model.CECountry
 import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
@@ -78,11 +79,11 @@ class CountryFragment : Fragment(), CEContract.View {
      *
      * vedi setCoins
      */
-    private fun setCoin(coinBinding: IncludeCoinBinding, coinToInsert: Int) {
+    private fun setCoin(coinBinding: IncludeCoinBinding, coin: CECoin) {
         coinBinding.tvValue.text =
-            ceCountry.coins[coinToInsert].value.toString()
+            coin.value.toString()
         coinBinding.ivCoin.setImageDrawable(
-            ceCountry.coins[coinToInsert].drawableId?.let {
+            coin.drawableId?.let {
                 ResourcesCompat.getDrawable(
                     resources,
                     it,
@@ -90,15 +91,14 @@ class CountryFragment : Fragment(), CEContract.View {
                 )
             })
         coinBinding.coin.visibility = ConstraintLayout.VISIBLE
-        setCoinOwnedColor(coinBinding, coinToInsert)
+        setCoinOwnedColor(coinBinding, coin)
         coinBinding.coin.setOnClickListener {
-            setOwned(coinToInsert)
-            setCoinOwnedColor(coinBinding, coinToInsert)
+            setOwned(coinBinding, coin)
         }
     }
 
-    private fun setCoinOwnedColor(coinBinding: IncludeCoinBinding, coinToInsert: Int) {
-        if (ceCountry.coins[coinToInsert].owned) {
+    private fun setCoinOwnedColor(coinBinding: IncludeCoinBinding, coin: CECoin) {
+        if (coin.owned) {
             coinBinding.dOwned.background =
                 ResourcesCompat.getDrawable(resources, R.color.coin_owned, context?.theme)
         } else {
@@ -122,10 +122,10 @@ class CountryFragment : Fragment(), CEContract.View {
                         if (coinToInsert > ceCountry.coins.size - 1)
                             break
                         when (j) {
-                            1 -> setCoin(binding.coin1, coinToInsert)
-                            2 -> setCoin(binding.coin2, coinToInsert)
-                            3 -> setCoin(binding.coin3, coinToInsert)
-                            4 -> setCoin(binding.coin4, coinToInsert)
+                            1 -> setCoin(binding.coin1, ceCountry.coins[coinToInsert])
+                            2 -> setCoin(binding.coin2, ceCountry.coins[coinToInsert])
+                            3 -> setCoin(binding.coin3, ceCountry.coins[coinToInsert])
+                            4 -> setCoin(binding.coin4, ceCountry.coins[coinToInsert])
                         }
                         coinToInsert++
                     }
@@ -134,10 +134,10 @@ class CountryFragment : Fragment(), CEContract.View {
                         if (coinToInsert > ceCountry.coins.size - 1)
                             break
                         when (j) {
-                            1 -> setCoin(binding.coin5, coinToInsert)
-                            2 -> setCoin(binding.coin6, coinToInsert)
-                            3 -> setCoin(binding.coin7, coinToInsert)
-                            4 -> setCoin(binding.coin8, coinToInsert)
+                            1 -> setCoin(binding.coin5, ceCountry.coins[coinToInsert])
+                            2 -> setCoin(binding.coin6, ceCountry.coins[coinToInsert])
+                            3 -> setCoin(binding.coin7, ceCountry.coins[coinToInsert])
+                            4 -> setCoin(binding.coin8, ceCountry.coins[coinToInsert])
                         }
                         coinToInsert++
                     }
@@ -146,10 +146,10 @@ class CountryFragment : Fragment(), CEContract.View {
                         if (coinToInsert > ceCountry.coins.size - 1)
                             break
                         when (j) {
-                            1 -> setCoin(binding.coin9, coinToInsert)
-                            2 -> setCoin(binding.coin10, coinToInsert)
-                            3 -> setCoin(binding.coin11, coinToInsert)
-                            4 -> setCoin(binding.coin12, coinToInsert)
+                            1 -> setCoin(binding.coin9, ceCountry.coins[coinToInsert])
+                            2 -> setCoin(binding.coin10, ceCountry.coins[coinToInsert])
+                            3 -> setCoin(binding.coin11, ceCountry.coins[coinToInsert])
+                            4 -> setCoin(binding.coin12, ceCountry.coins[coinToInsert])
                         }
                         coinToInsert++
                     }
@@ -157,9 +157,11 @@ class CountryFragment : Fragment(), CEContract.View {
         }
     }
 
-    private fun setOwned(coinToInsert: Int) {
-        val owned = !ceCountry.coins[coinToInsert].owned
-        presenter.setOwned(ceCountry, ceCountry.coins[coinToInsert], owned)
+    private fun setOwned(coinBinding: IncludeCoinBinding, coin: CECoin) {
+        val owned = !coin.owned
+        coin.owned = owned
+        setCoinOwnedColor(coinBinding, coin)
+        presenter.setOwned(ceCountry, coin, owned)
     }
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {}
