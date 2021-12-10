@@ -1,6 +1,8 @@
 package com.example.collezioneeuro.presenter
 
 import com.example.collezioneeuro.contract.CEContract
+import com.example.collezioneeuro.model.CECoin
+import com.example.collezioneeuro.model.CECountry
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -32,6 +34,12 @@ class CEPresenter(
         launch {
             val countries = repository.getCountries()
             view?.onGetCountries(countries)
+        }
+    }
+
+    override fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean) {
+        launch {
+            repository.setOwned(ceCountry, ceCoin, owned)
         }
     }
 

@@ -1,5 +1,6 @@
 package com.example.collezioneeuro.contract
 
+import com.example.collezioneeuro.model.CECoin
 import com.example.collezioneeuro.model.CECountry
 
 /**
@@ -15,6 +16,7 @@ interface CEContract {
         fun bindView(view: View)
 
         fun getCountries()
+        fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean)
     }
 
 }

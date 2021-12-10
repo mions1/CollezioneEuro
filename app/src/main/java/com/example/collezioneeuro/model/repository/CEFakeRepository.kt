@@ -39,4 +39,10 @@ class CEFakeRepository : CERepositoryInterface {
         return countries
     }
 
+    override suspend fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean) {
+        val ceCoinIdx = ceCountry.coins.indexOf(ceCoin)
+        val ceCountryIdx = countries.indexOf(ceCountry)
+        countries[ceCountryIdx].coins[ceCoinIdx].owned = owned
+    }
+
 }
