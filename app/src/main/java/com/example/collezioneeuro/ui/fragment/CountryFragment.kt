@@ -90,9 +90,20 @@ class CountryFragment : Fragment(), CEContract.View {
                 )
             })
         coinBinding.coin.visibility = ConstraintLayout.VISIBLE
+        setCoinOwnedColor(coinBinding, coinToInsert)
+        coinBinding.coin.setOnClickListener {
+            setOwned(coinToInsert)
+            setCoinOwnedColor(coinBinding, coinToInsert)
+        }
+    }
+
+    private fun setCoinOwnedColor(coinBinding: IncludeCoinBinding, coinToInsert: Int) {
         if (ceCountry.coins[coinToInsert].owned) {
             coinBinding.dOwned.background =
                 ResourcesCompat.getDrawable(resources, R.color.coin_owned, context?.theme)
+        } else {
+            coinBinding.dOwned.background =
+                ResourcesCompat.getDrawable(resources, R.color.coin_no_owned, context?.theme)
         }
     }
 
@@ -144,6 +155,11 @@ class CountryFragment : Fragment(), CEContract.View {
                     }
             }
         }
+    }
+
+    private fun setOwned(coinToInsert: Int) {
+        val owned = !ceCountry.coins[coinToInsert].owned
+        presenter.setOwned(ceCountry, ceCountry.coins[coinToInsert], owned)
     }
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {}
