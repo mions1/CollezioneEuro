@@ -18,4 +18,4 @@ data class CECountry(val country: String, val coins: ArrayList<CECoin>) : Parcel
 }
 
 @Parcelize
-data class CECoin(val value: Double, var drawableId: Int?, val owned: Boolean) : Parcelable
+data class CECoin(val value: Double, var drawableId: Int?, var owned: Boolean) : Parcelable
