@@ -53,7 +53,7 @@ class CountryFragment : Fragment(), CEContract.View {
         super.onCreate(savedInstanceState)
         arguments?.getParcelable<CECountry>(ARG_COUNTRY)?.let { ceCountry = it }
 
-        repository = CEFakeRepository()
+        repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
         presenter.bindView(this)
     }

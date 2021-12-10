@@ -39,7 +39,7 @@ class HomeFragment : Fragment(), CEContract.View {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        repository = CEFakeRepository()
+        repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
         presenter.bindView(this)
     }
