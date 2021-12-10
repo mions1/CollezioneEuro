@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentCountryBinding
 import com.example.collezioneeuro.databinding.IncludeCoinBinding
@@ -80,8 +82,18 @@ class CountryFragment : Fragment(), CEContract.View {
         coinBinding.tvValue.text =
             ceCountry.coins[coinToInsert].value.toString()
         coinBinding.ivCoin.setImageDrawable(
-            ceCountry.coins[coinToInsert].drawableId?.let { resources.getDrawable(it) })
+            ceCountry.coins[coinToInsert].drawableId?.let {
+                ResourcesCompat.getDrawable(
+                    resources,
+                    it,
+                    context?.theme
+                )
+            })
         coinBinding.coin.visibility = ConstraintLayout.VISIBLE
+        if (ceCountry.coins[coinToInsert].owned) {
+            coinBinding.dOwned.background =
+                ResourcesCompat.getDrawable(resources, R.color.coin_owned, context?.theme)
+        }
     }
 
     /**
