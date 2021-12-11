@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), CEContract.View {
         binding.rvCountries.adapter =
             CountriesAdapter(countries, object : CountriesAdapter.OnClickListener {
                 override fun onClick(clicked: CECountry) {
-                    activityParent.replaceFragmentToCountryFragment(clicked)
+                    activityParent.replaceFragmentToCoinsFragment(clicked)
                 }
             })
     }

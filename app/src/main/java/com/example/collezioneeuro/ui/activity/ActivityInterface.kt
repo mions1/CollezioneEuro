@@ -5,6 +5,6 @@ import com.example.collezioneeuro.model.CECountry
 interface ActivityInterface {
 
     fun replaceFragmentToHomeFragment()
-    fun replaceFragmentToCountryFragment(ceCountry: CECountry)
+    fun replaceFragmentToCoinsFragment(ceCountry: CECountry)
 
 }

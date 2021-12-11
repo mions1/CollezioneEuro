@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.model.CECountry
-import com.example.collezioneeuro.ui.fragment.CountryFragment
+import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 
 class MainActivity : AppCompatActivity(), ActivityInterface {
@@ -22,11 +22,11 @@ class MainActivity : AppCompatActivity(), ActivityInterface {
             .commit()
     }
 
-    override fun replaceFragmentToCountryFragment(ceCountry: CECountry) {
-        val fragment = CountryFragment.newInstance(ceCountry)
+    override fun replaceFragmentToCoinsFragment(ceCountry: CECountry) {
+        val fragment = CoinsFragment.newInstance(ceCountry)
         supportFragmentManager.beginTransaction()
-            .addToBackStack(CountryFragment.TAG)
-            .replace(R.id.fragment, fragment, CountryFragment.TAG)
+            .addToBackStack(CoinsFragment.TAG)
+            .replace(R.id.fragment, fragment, CoinsFragment.TAG)
             .commit()
     }
 
