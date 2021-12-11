@@ -27,6 +27,24 @@ class CEPresenter(
     }
 
     /**
+     * Salva una sola country
+     */
+    override fun saveCountry(ceCountry: CECountry) {
+        launch {
+            repository.saveCountry(ceCountry)
+        }
+    }
+
+    /**
+     * Salva una lista di country
+     */
+    override fun saveCountries(ceCountries: ArrayList<CECountry>) {
+        launch {
+            repository.saveCountries(ceCountries)
+        }
+    }
+
+    /**
      * Recupera le countries dal repository e poi notifica la view chiamante tramite la callback
      * onGetCountries.
      */
@@ -37,9 +55,21 @@ class CEPresenter(
         }
     }
 
+    /**
+     * Cambia lo stato di owned ad una moneta
+     */
     override fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean) {
         launch {
             repository.setOwned(ceCountry, ceCoin, owned)
+        }
+    }
+
+    /**
+     * Pulisci il repository
+     */
+    override fun clear() {
+        launch {
+            repository.clear()
         }
     }
 

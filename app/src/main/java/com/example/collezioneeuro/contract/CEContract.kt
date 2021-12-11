@@ -15,8 +15,11 @@ interface CEContract {
     interface Presenter {
         fun bindView(view: View)
 
+        fun saveCountry(ceCountry: CECountry)
+        fun saveCountries(ceCountries: ArrayList<CECountry>)
         fun getCountries()
         fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean)
+        fun clear()
     }
 
 }
