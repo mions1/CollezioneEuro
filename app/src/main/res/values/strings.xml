@@ -3,4 +3,5 @@
     <string name="holder_country_arrow_right_contentdescription">Go to details</string>
     <string name="coin_contentdescription">Coin</string>
     <string name="flag_contentdescription">Flag</string>
+    <string name="cerca_per_nazione_hint">Cerca per nazione</string>
 </resources>
