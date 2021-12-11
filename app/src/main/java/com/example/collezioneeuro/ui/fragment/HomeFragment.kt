@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +61,8 @@ class HomeFragment : Fragment(), CEContract.View {
 
         presenter.getCountries()
         initRecyclerView()
+
+        setSearchViewListener()
     }
 
     private fun initRecyclerView() {
@@ -74,6 +77,22 @@ class HomeFragment : Fragment(), CEContract.View {
                     activityParent.replaceFragmentToCoinsFragment(clicked)
                 }
             })
+    }
+
+    /**
+     * Quando viene effettuata una ricerca, chiama il relativo metodo nell'adapter
+     */
+    private fun setSearchViewListener() {
+        binding.svCountry.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                (binding.rvCountries.adapter as? CountriesAdapter)?.filter?.filter(newText)
+                return true
+            }
+
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+        })
     }
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
