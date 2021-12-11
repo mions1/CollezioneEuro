@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="CEDefaultMarginLeft">15dp</dimen>
+    <dimen name="CEDefaultMarginTop">10dp</dimen>
+    <dimen name="CEDefaultMarginRight">15dp</dimen>
+    <dimen name="CEDefaultMarginBottom">10dp</dimen>
+
     <dimen name="coin_image_width">100dp</dimen>
     <dimen name="coin_image_height">100dp</dimen>
 
+    <dimen name="flag_image_width">150dp</dimen>
+    <dimen name="flag_image_height">150dp</dimen>
+
     <dimen name="coin_text_width">@dimen/coin_image_width</dimen>
 
-    <dimen name="CETextPaddingLeft">15dp</dimen>
-    <dimen name="CETextPaddingTop">10dp</dimen>
-    <dimen name="CETextPaddingBottom">10dp</dimen>
+    <dimen name="CETextPaddingLeft">@dimen/CEDefaultMarginLeft</dimen>
+    <dimen name="CETextPaddingTop">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="CETextPaddingBottom">@dimen/CEDefaultMarginBottom</dimen>
 
     <dimen name="CETextHolderCountryPaddingLeft">@dimen/CETextPaddingLeft</dimen>
     <dimen name="CETextHolderCountryPaddingTop">@dimen/CETextPaddingTop</dimen>
@@ -17,5 +25,11 @@
     <dimen name="CEImageViewHolderCountryPaddingTop">@dimen/CETextHolderCountryPaddingTop</dimen>
     <dimen name="CEImageViewHolderCountryPaddingBottom">@dimen/CETextHolderCountryPaddingBottom
     </dimen>
+
+    <dimen name="CECardViewCountryCardViewHolderMarginLeft">@dimen/CEDefaultMarginLeft</dimen>
+    <dimen name="CECardViewCountryCardViewHolderMarginTop">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="CECardViewCountryCardViewHolderMarginRight">@dimen/CEDefaultMarginRight</dimen>
+    <dimen name="CECardViewCountryCardViewHolderMarginBottom">@dimen/CEDefaultMarginBottom</dimen>
+
     <dimen name="coin_owned_bar_height">4dp</dimen>
 </resources>

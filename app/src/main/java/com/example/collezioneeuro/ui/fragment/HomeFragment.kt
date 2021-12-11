@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentHomeBinding
 import com.example.collezioneeuro.model.CECountry
@@ -61,8 +63,13 @@ class HomeFragment : Fragment(), CEContract.View {
     }
 
     private fun initRecyclerView() {
+        val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 2)
+        binding.rvCountries.layoutManager = mLayoutManager
+    }
+
+    private fun setRecyclerViewAdapter(countries: ArrayList<CECountry>) {
         binding.rvCountries.adapter =
-            CountriesAdapter(ceCountries, object : CountriesAdapter.OnClickListener {
+            CountriesAdapter(countries, object : CountriesAdapter.OnClickListener {
                 override fun onClick(clicked: CECountry) {
                     activityParent.replaceFragmentToCountryFragment(clicked)
                 }
@@ -71,7 +78,7 @@ class HomeFragment : Fragment(), CEContract.View {
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
         this.ceCountries = countries
-        initRecyclerView()
+        setRecyclerViewAdapter(countries)
     }
 
 }

@@ -8,13 +8,18 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primary">@color/design_default_color_primary</color>
-    <color name="primaryVariant">@color/design_default_color_primary_variant</color>
-    <color name="secondary">@color/design_default_color_secondary</color>
-    <color name="secondaryVariant">@color/design_default_color_secondary_variant</color>
+    <color name="primaryBlue">#545FA7</color>
+    <color name="primaryVariantBlue">#303F9F</color>
+    <color name="secondaryYellow">#FFE799</color>
+    <color name="secondaryVariantYellow">#FFCF33</color>
 
-    <color name="green">#55FFBB</color>
-    <color name="red">#FF55BB</color>
+    <color name="primary">@color/primaryBlue</color>
+    <color name="primaryVariant">@color/primaryVariantBlue</color>
+    <color name="secondary">@color/secondaryYellow</color>
+    <color name="secondaryVariant">@color/secondaryVariantYellow</color>
+
+    <color name="green">#00897B</color>
+    <color name="red">#C62828</color>
 
     <color name="coin_owned">@color/green</color>
     <color name="coin_no_owned">@color/red</color>

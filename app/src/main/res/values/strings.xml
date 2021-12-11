@@ -2,4 +2,5 @@
     <string name="app_name">CollezioneEuro</string>
     <string name="holder_country_arrow_right_contentdescription">Go to details</string>
     <string name="coin_contentdescription">Coin</string>
+    <string name="flag_contentdescription">Flag</string>
 </resources>

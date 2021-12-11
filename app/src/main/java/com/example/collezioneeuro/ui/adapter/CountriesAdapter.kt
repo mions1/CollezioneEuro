@@ -2,8 +2,9 @@ package com.example.collezioneeuro.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
-import com.example.collezioneeuro.databinding.HolderCountryBinding
+import com.example.collezioneeuro.databinding.HolderCountryCardBinding
 import com.example.collezioneeuro.model.CECountry
 
 class CountriesAdapter(
@@ -20,7 +21,7 @@ class CountriesAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountriesViewHolder =
         CountriesViewHolder(
-            HolderCountryBinding.inflate(
+            HolderCountryCardBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -34,19 +35,19 @@ class CountriesAdapter(
     override fun getItemCount(): Int = adapterCountries.size
 
     inner class CountriesViewHolder(
-        private val binding: HolderCountryBinding,
+        private val binding: HolderCountryCardBinding,
         onClickListener: OnClickListener? = null
     ) :
         RecyclerView.ViewHolder(binding.root) {
 
         init {
-                onClickListener?.let { onClickIt ->
-                    binding.holder.setOnClickListener {
-                        onClickIt.onClick(
-                            adapterCountries[adapterPosition]
-                        )
-                    }
+            onClickListener?.let { onClickIt ->
+                binding.holder.setOnClickListener {
+                    onClickIt.onClick(
+                        adapterCountries[adapterPosition]
+                    )
                 }
+            }
         }
 
         /**
@@ -56,6 +57,13 @@ class CountriesAdapter(
          */
         fun bind(ceCountry: CECountry) {
             binding.tvCountry.text = ceCountry.country
+            binding.ivFlag.setImageDrawable(ceCountry.drawableId?.let {
+                AppCompatResources.getDrawable(
+                    binding.root.context,
+                    it
+                )
+            })
+            binding.tvCount.text = "${ceCountry.ownedCount()}/${ceCountry.coins.size}"
         }
 
     }

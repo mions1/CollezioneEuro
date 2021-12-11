@@ -11,11 +11,11 @@ class CEFakeRepository : CERepositoryInterface {
     }
 
     private val countries: ArrayList<CECountry> = arrayListOf(
-        CECountry("Italia", createItalianCoins()),
-        CECountry("Spagna", CECountry.createCoins()),
-        CECountry("Grecia", CECountry.createCoins()),
-        CECountry("Germania", CECountry.createCoins()),
-        CECountry("Francia", CECountry.createCoins()),
+        CECountry("Italia", createItalianCoins(), R.drawable.flag_italia),
+        CECountry("Spagna", CECountry.createCoins(), R.drawable.flag_default),
+        CECountry("Grecia", CECountry.createCoins(), R.drawable.flag_default),
+        CECountry("Germania", CECountry.createCoins(), R.drawable.flag_default),
+        CECountry("Francia", CECountry.createCoins(), R.drawable.flag_default),
     )
 
     private fun createItalianCoins(): ArrayList<CECoin> {

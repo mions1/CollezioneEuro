@@ -31,6 +31,13 @@
         <item name="android:textAlignment">center</item>
     </style>
 
+    <style name="CETextViewCountryCardViewHolder" parent="CESubtitle">
+        <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="CETextViewCountCardViewHolder" parent="CEText">
+        <item name="android:textAlignment">textEnd</item>
+    </style>
 
     <!-- Other -->
     <style name="CEDividerHolderCountry">
@@ -48,6 +55,25 @@
     <style name="CEImageViewCountryCoin">
         <item name="android:layout_width">@dimen/coin_image_width</item>
         <item name="android:layout_height">@dimen/coin_image_height</item>
+    </style>
+
+    <style name="CEImageViewFlagCardViewHolder">
+        <item name="android:layout_width">@dimen/flag_image_width</item>
+        <item name="android:layout_height">@dimen/flag_image_height</item>
+    </style>
+
+    <style name="CECardViewCountryCardViewHolder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="cardCornerRadius">4dp</item>
+        <item name="android:layout_marginLeft">@dimen/CECardViewCountryCardViewHolderMarginLeft
+        </item>
+        <item name="android:layout_marginTop">@dimen/CECardViewCountryCardViewHolderMarginTop</item>
+        <item name="android:layout_marginRight">@dimen/CECardViewCountryCardViewHolderMarginRight
+        </item>
+        <item name="android:layout_marginBottom">
+            @dimen/CECardViewCountryCardViewHolderMarginBottom
+        </item>
     </style>
 
 </resources>

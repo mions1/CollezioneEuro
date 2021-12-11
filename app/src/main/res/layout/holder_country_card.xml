@@ -1,0 +1,33 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
+    style="@style/CECardViewCountryCardViewHolder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvCountry"
+            style="@style/CETextViewCountryCardViewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Country" />
+
+        <ImageView
+            android:id="@+id/ivFlag"
+            style="@style/CEImageViewFlagCardViewHolder"
+            android:contentDescription="@string/flag_contentdescription"
+            tools:src="@drawable/flag_default" />
+
+        <TextView
+            android:id="@+id/tvCount"
+            style="@style/CETextViewCountCardViewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="1/7" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
