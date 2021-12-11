@@ -108,4 +108,18 @@
         <item name="android:layout_height">@dimen/coin_owned_bar_height</item>
     </style>
 
+    <!-- Toolbars -->
+
+    <style name="CEToolBarMainActivity">
+        <item name="android:elevation">4dp</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+    </style>
+
+    <style name="CETextViewTitleToolBarMainActivity" parent="CETitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
