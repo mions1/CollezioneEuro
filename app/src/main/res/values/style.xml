@@ -41,6 +41,7 @@
 
     <style name="CETextViewCoinValueCardViewHolder" parent="CESubtitle">
         <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <!-- Other -->
@@ -64,6 +65,7 @@
     <style name="CEImageViewFlagCardViewHolder">
         <item name="android:layout_width">@dimen/flag_image_width</item>
         <item name="android:layout_height">@dimen/flag_image_height</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="CECardViewCountryCardViewHolder">
@@ -83,6 +85,7 @@
     <style name="CEImageViewCoinCardViewHolder">
         <item name="android:layout_width">@dimen/coin_image_width</item>
         <item name="android:layout_height">@dimen/coin_image_height</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
     <style name="CECardViewCoinCardViewHolder">
@@ -97,6 +100,12 @@
         <item name="android:layout_marginBottom">
             @dimen/CECardViewCountryCardViewHolderMarginBottom
         </item>
+    </style>
+
+    <style name="CEViewDividerCoinCardViewHolder">
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_width">@dimen/coin_image_width</item>
+        <item name="android:layout_height">@dimen/coin_owned_bar_height</item>
     </style>
 
 </resources>

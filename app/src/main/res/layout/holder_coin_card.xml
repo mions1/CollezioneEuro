@@ -16,8 +16,7 @@
 
         <View
             android:id="@+id/dOwned"
-            android:layout_width="@dimen/coin_image_width"
-            android:layout_height="@dimen/coin_owned_bar_height"
+            style="@style/CEViewDividerCoinCardViewHolder"
             android:background="@color/coin_no_owned" />
 
         <TextView
