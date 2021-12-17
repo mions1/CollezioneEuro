@@ -9,14 +9,16 @@ import io.realm.exceptions.RealmException
 open class RealmCountry(
     @PrimaryKey
     var country: String = "",
+    var countryTag: String = "",
     var coins: RealmList<RealmCoin> = RealmList(),
-    var drawableId: Int? = -1
+    var drawableId: Int? = null
 ) : RealmObject()
 
 open class RealmCoin(
     var value: Double = 0.01,
-    var owned: Boolean = true,
-    var drawableId: Int? = -1
+    var owned: Boolean = false,
+    var drawableId: Int? = null,
+    var drawableUrl: String? = null
 ) : RealmObject()
 
 class CERealmRepository : CERepositoryInterface {
@@ -34,6 +36,7 @@ class CERealmRepository : CERepositoryInterface {
             realmCoin.value = ceCoin.value
             realmCoin.owned = ceCoin.owned
             realmCoin.drawableId = ceCoin.drawableId
+            realmCoin.drawableUrl = ceCoin.drawableUrl
             realmCoins.add(realmCoin)
         }
         return realmCoins
@@ -44,6 +47,7 @@ class CERealmRepository : CERepositoryInterface {
      */
     private fun mapCECountryToRealmCountry(realm: Realm, ceCountry: CECountry): RealmModel {
         val realmCountry = realm.createObject(RealmCountry::class.java, ceCountry.country)
+        realmCountry.countryTag = ceCountry.countryTag
         realmCountry.coins = mapCECoinsToRealmCoin(realm, ceCountry.coins)
         realmCountry.drawableId = ceCountry.drawableId
         return realmCountry
@@ -60,7 +64,8 @@ class CERealmRepository : CERepositoryInterface {
             val ceCoin = CECoin(
                 realmCoin.value,
                 realmCoin.drawableId,
-                realmCoin.owned
+                realmCoin.owned,
+                realmCoin.drawableUrl
             )
             ceCoins.add(ceCoin)
         }
@@ -78,6 +83,7 @@ class CERealmRepository : CERepositoryInterface {
             ceCountries.add(
                 CECountry(
                     ceCountry.country,
+                    CECountry.getTag(ceCountry.country),
                     mapRealmCoinsToCECoins(ceCountry.coins),
                     ceCountry.drawableId
                 )
@@ -105,6 +111,7 @@ class CERealmRepository : CERepositoryInterface {
             it.insertOrUpdate(
                 RealmCountry(
                     newCountry.country,
+                    CECountry.getTag(newCountry.countryTag),
                     mapCECoinsToRealmCoin(realm, newCountry.coins),
                     newCountry.drawableId
                 )
