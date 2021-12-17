@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.databinding.HolderCoinCardBinding
 import com.example.collezioneeuro.model.CECoin
+import com.squareup.picasso.Picasso
 
 /**
  * Adapter per le monete da visualizzare del paese selezionato.
@@ -65,12 +66,9 @@ class CoinsAdapter(
          */
         fun bind(ceCoin: CECoin) {
             binding.tvValue.text = "${ceCoin.value} €"
-            binding.ivCoin.setImageDrawable(ceCoin.drawableId?.let {
-                AppCompatResources.getDrawable(
-                    binding.root.context,
-                    it
-                )
-            })
+            if (ceCoin.drawableUrl != null) {
+                Picasso.get().load(ceCoin.drawableUrl).into(binding.ivCoin)
+            }
             if (ceCoin.owned)
                 binding.dOwned.background =
                     AppCompatResources.getDrawable(binding.root.context, R.color.coin_owned)
