@@ -4,13 +4,19 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.model.CECountry
+import com.example.collezioneeuro.model.repository.CEFakeRepository
+import com.example.collezioneeuro.presenter.CEPresenter
+import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 
 class MainActivity : AppCompatActivity(), ActivityInterface {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        CEPresenter(RuntimeDispatcherProvider(), CEFakeRepository.SingleInstance).clear()
 
         replaceFragmentToHomeFragment()
     }
