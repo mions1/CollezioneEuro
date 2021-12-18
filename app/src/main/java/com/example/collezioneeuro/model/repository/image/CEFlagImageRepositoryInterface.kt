@@ -7,7 +7,7 @@ interface CEFlagImageRepositoryInterface {
     /**
      * Ritorna l'url della pagina che contiene l'immagine (o le immagini) della bandiera del paese
      */
-    fun getHtmlUrl(countryTag: String): String
+    fun getHtmlUrl(countryEnName: String): String
 
     /**
      * Ritorna il codice html dell'url passato
