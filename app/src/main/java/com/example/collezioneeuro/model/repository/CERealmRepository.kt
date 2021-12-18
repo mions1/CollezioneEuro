@@ -116,7 +116,8 @@ class CERealmRepository : CERepositoryInterface {
                     newCountry.country,
                     CECountry.getTag(newCountry.countryTag),
                     mapCECoinsToRealmCoin(realm, newCountry.coins),
-                    newCountry.drawableId
+                    newCountry.drawableId,
+                    newCountry.drawableUrl
                 )
             )
         }
