@@ -19,7 +19,7 @@ class CoinsAdapter(
 ) :
     RecyclerView.Adapter<CoinsAdapter.CoinsViewHolder>() {
 
-    private val adapterCoins = ArrayList(ceCoins)
+    private val adapterCoins = ArrayList(ceCoins.sortedBy { it.value })
 
     interface OnClickListener {
         fun onClick(clicked: CECoin)
