@@ -20,7 +20,7 @@ class CountriesAdapter(
 ) :
     RecyclerView.Adapter<CountriesAdapter.CountriesViewHolder>(), Filterable {
 
-    private val adapterCountries = ArrayList(ceCountries)
+    private val adapterCountries = ArrayList(ceCountries.sortedBy { it.country })
     private val mFilter = ItemFilter()
 
     interface OnClickListener {
@@ -140,7 +140,7 @@ class CountriesAdapter(
 
         override fun publishResults(constraint: CharSequence, results: FilterResults) {
             adapterCountries.clear()
-            adapterCountries.addAll(results.values as ArrayList<CECountry>)
+            adapterCountries.addAll((results.values as ArrayList<CECountry>).sortedBy { it.country })
             notifyDataSetChanged()
         }
     }
