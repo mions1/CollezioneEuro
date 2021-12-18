@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.databinding.HolderCoinCardBinding
 import com.example.collezioneeuro.model.CECoin
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 /**
@@ -66,8 +67,10 @@ class CoinsAdapter(
          */
         fun bind(ceCoin: CECoin) {
             binding.tvValue.text = "${ceCoin.value} €"
-            if (ceCoin.drawableUrl != null) {
-                Picasso.get().load(ceCoin.drawableUrl).into(binding.ivCoin)
+            when {
+                ceCoin.drawableUrl != null -> setDrawableUrlIntoImageView(ceCoin)
+                ceCoin.drawableId != null -> setDrawableIdIntoImageView(ceCoin.drawableId!!)
+                else -> setDrawableIdIntoImageView(R.drawable.coin_default)
             }
             if (ceCoin.owned)
                 binding.dOwned.background =
@@ -75,6 +78,35 @@ class CoinsAdapter(
             else
                 binding.dOwned.background =
                     AppCompatResources.getDrawable(binding.root.context, R.color.coin_no_owned)
+        }
+
+        /**
+         * Imposta l'immagine della moneta da url.
+         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default
+         */
+        private fun setDrawableUrlIntoImageView(ceCoin: CECoin) {
+            Picasso.get().load(ceCoin.drawableUrl).into(binding.ivCoin,
+                object : Callback {
+                    override fun onSuccess() {}
+                    override fun onError(e: Exception?) {
+                        when {
+                            ceCoin.drawableId != null -> setDrawableIdIntoImageView(ceCoin.drawableId!!)
+                            else -> setDrawableIdIntoImageView(R.drawable.coin_default)
+                        }
+                    }
+                })
+        }
+
+        /**
+         * Imposta l'immagine della moneta dall'id del drawable passato
+         */
+        private fun setDrawableIdIntoImageView(id: Int) {
+            binding.ivCoin.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    binding.root.context,
+                    id
+                )
+            )
         }
 
     }

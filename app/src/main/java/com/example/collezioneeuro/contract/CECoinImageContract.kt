@@ -2,7 +2,7 @@ package com.example.collezioneeuro.contract
 
 import org.jsoup.nodes.Document
 
-interface CEImageContract {
+interface CECoinImageContract {
 
     interface View {
         fun onGetHtml(document: Document)
