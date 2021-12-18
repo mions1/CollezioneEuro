@@ -3,6 +3,7 @@ package com.example.collezioneeuro.model.repository
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.model.CECoin
 import com.example.collezioneeuro.model.CECountry
+import com.example.collezioneeuro.model.CECountryConstants
 
 /**
  * FakeRepository crea dei valori di default.
@@ -22,7 +23,8 @@ class CEFakeRepository : CERepositoryInterface {
         fun getOriginalCountries() =
             arrayListOf(
                 CECountry(
-                    "Lussemburgo", CECountry.getTag("Lussemburgo"),
+                    CECountryConstants.Countries.LUSSEMBURGO.itName,
+                    CECountryConstants.Countries.LUSSEMBURGO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -65,13 +67,20 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/lu/Luxembourg_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/lu/Luxembourg_1Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Flag_of_Luxembourg.svg/800px-Flag_of_Luxembourg.svg.png"
                 ),
                 CECountry(
-                    "Finlandia", CECountry.getTag("Finlandia"),
+                    CECountryConstants.Countries.FINLANDIA.itName,
+                    CECountryConstants.Countries.FINLANDIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -121,10 +130,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/fi/Finland_50cent.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Flag_of_Finland.svg/800px-Flag_of_Finland.svg.png"
                 ),
                 CECountry(
-                    "Repubblica di San Marino", CECountry.getTag("Repubblica di San Marino"),
+                    CECountryConstants.Countries.SAN_MARINO.itName,
+                    CECountryConstants.Countries.SAN_MARINO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -179,7 +191,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Flag_of_San_Marino.svg/800px-Flag_of_San_Marino.svg.png"
                 ),
                 CECountry(
-                    "Francia", CECountry.getTag("Francia"),
+                    CECountryConstants.Countries.FRANCIA.itName,
+                    CECountryConstants.Countries.FRANCIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -222,13 +235,20 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/fr/France_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/fr/France_1Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Flag_of_France.svg/800px-Flag_of_France.svg.png"
                 ),
                 CECountry(
-                    "Irlanda", CECountry.getTag("Irlanda"),
+                    CECountryConstants.Countries.IRLANDA.itName,
+                    CECountryConstants.Countries.IRLANDA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -283,7 +303,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Flag_of_Ireland.svg/800px-Flag_of_Ireland.svg.png"
                 ),
                 CECountry(
-                    "Estonia", CECountry.getTag("Estonia"),
+                    CECountryConstants.Countries.ESTONIA.itName,
+                    CECountryConstants.Countries.ESTONIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -320,13 +341,26 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/et/Estonia_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/et/Estonia_1Euro.jpg"
+                        ),
+                        CECoin(
+                            2.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/et/Estonia_2Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8f/Flag_of_Estonia.svg/800px-Flag_of_Estonia.svg.png"
                 ),
                 CECountry(
-                    "Portogallo", CECountry.getTag("Portogallo"),
+                    CECountryConstants.Countries.PORTOGALLO.itName,
+                    CECountryConstants.Countries.PORTOGALLO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -369,13 +403,20 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/pt/Portugal_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/pt/Portugal_1Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Portugal.svg/600px-Flag_of_Portugal.svg.png"
                 ),
                 CECountry(
-                    "Paesi Bassi", CECountry.getTag("Paesi Bassi"),
+                    CECountryConstants.Countries.PAESI_BASSI.itName,
+                    CECountryConstants.Countries.PAESI_BASSI.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -430,7 +471,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/2/20/Flag_of_the_Netherlands.svg/800px-Flag_of_the_Netherlands.svg.png"
                 ),
                 CECountry(
-                    "Slovenia", CECountry.getTag("Slovenia"),
+                    CECountryConstants.Countries.SLOVENIA.itName,
+                    CECountryConstants.Countries.SLOVENIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -467,13 +509,26 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/sl/Slovenia_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/sl/Slovenia_1Euro.jpg"
+                        ),
+                        CECoin(
+                            2.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/sl/Slovenia_2Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f0/Flag_of_Slovenia.svg/800px-Flag_of_Slovenia.svg.png"
                 ),
                 CECountry(
-                    "Andorra", CECountry.getTag("Andorra"),
+                    CECountryConstants.Countries.ANDORRA.itName,
+                    CECountryConstants.Countries.ANDORRA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -523,10 +578,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/ad/ad_2euro.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https:////upload.wikimedia.org/wikipedia/commons/thumb/1/19/Flag_of_Andorra.svg/800px-Flag_of_Andorra.svg.png"
                 ),
                 CECountry(
-                    "Latvia", CECountry.getTag("Latvia"),
+                    CECountryConstants.Countries.LETTONIA.itName,
+                    CECountryConstants.Countries.LETTONIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -576,10 +634,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/lv/Latvia_50cent.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/8/84/Flag_of_Latvia.svg/800px-Flag_of_Latvia.svg.png"
                 ),
                 CECountry(
-                    "Spagna", CECountry.getTag("Spagna"),
+                    CECountryConstants.Countries.SPAGNA.itName,
+                    CECountry.getTag(CECountryConstants.Countries.SPAGNA.tag),
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -634,7 +695,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Flag_of_Spain.svg/750px-Flag_of_Spain.svg.png"
                 ),
                 CECountry(
-                    "Belgio", CECountry.getTag("Belgio"),
+                    CECountryConstants.Countries.BELGIO.itName,
+                    CECountryConstants.Countries.BELGIO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -684,10 +746,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/be/Belgium_50cent_2002.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/Flag_of_Belgium_%28civil%29.svg/800px-Flag_of_Belgium_%28civil%29.svg.png"
                 ),
                 CECountry(
-                    "Italia", CECountry.getTag("Italia"),
+                    CECountryConstants.Countries.ITALIA.itName,
+                    CECountryConstants.Countries.ITALIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -742,7 +807,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/Flag_of_Italy.svg/800px-Flag_of_Italy.svg.png"
                 ),
                 CECountry(
-                    "Lituania", CECountry.getTag("Lituania"),
+                    CECountryConstants.Countries.LITUANIA.itName,
+                    CECountryConstants.Countries.LITUANIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -797,7 +863,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Flag_of_Lithuania.svg/800px-Flag_of_Lithuania.svg.png"
                 ),
                 CECountry(
-                    "Cipro", CECountry.getTag("Cipro"),
+                    CECountryConstants.Countries.CIPRO.itName,
+                    CECountryConstants.Countries.CIPRO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -836,15 +903,24 @@ class CEFakeRepository : CERepositoryInterface {
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/cy/Cyprus_20cent.jpg"
                         ),
                         CECoin(
+                            2.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/cy/Cyprus_2Euro.jpg"
+                        ),
+                        CECoin(
                             0.50,
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/cy/Cyprus_50cent.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Flag_of_Cyprus.svg/800px-Flag_of_Cyprus.svg.png"
                 ),
                 CECountry(
-                    "Austria", CECountry.getTag("Austria"),
+                    CECountryConstants.Countries.AUSTRIA.itName,
+                    CECountryConstants.Countries.AUSTRIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -881,11 +957,26 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/at/Austria_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/at/Austria_1Euro.jpg"
+                        ),
+                        CECoin(
+                            2.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/at/Austria_2Euro.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Flag_of_Austria.svg/800px-Flag_of_Austria.svg.png"
                 ),
                 CECountry(
-                    "Città del Vaticano", CECountry.getTag("Città del Vaticano"),
+                    CECountryConstants.Countries.VATICANO.itName,
+                    CECountryConstants.Countries.VATICANO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -935,10 +1026,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/va/Vaticano_2euro_2002.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Flag_of_the_Vatican_City.svg/500px-Flag_of_the_Vatican_City.svg.png"
                 ),
                 CECountry(
-                    "Germania", CECountry.getTag("Germania"),
+                    CECountryConstants.Countries.GERMANIA.itName,
+                    CECountryConstants.Countries.GERMANIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -993,7 +1087,8 @@ class CEFakeRepository : CERepositoryInterface {
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Flag_of_Germany.svg/800px-Flag_of_Germany.svg.png"
                 ),
                 CECountry(
-                    "Slovacchia", CECountry.getTag("Slovacchia"),
+                    CECountryConstants.Countries.SLOVACCHIA.itName,
+                    CECountryConstants.Countries.SLOVACCHIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -1030,13 +1125,26 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/sk/Slovakia_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/sk/Slovakia_1Euro.jpg"
+                        ),
+                        CECoin(
+                            2.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/sk/Slovakia_2Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Flag_of_Slovakia.svg/512px-Flag_of_Slovakia.svg.png"
                 ),
                 CECountry(
-                    "Monaco", CECountry.getTag("Monaco"),
+                    CECountryConstants.Countries.MONACO.itName,
+                    CECountryConstants.Countries.MONACO.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -1086,10 +1194,13 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/mo/Monaco_50cent_2001.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/Flag_of_Monaco.svg/750px-Flag_of_Monaco.svg.png"
                 ),
                 CECountry(
-                    "Malta", CECountry.getTag("Malta"),
+                    CECountryConstants.Countries.MALTA.itName,
+                    CECountryConstants.Countries.MALTA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -1132,13 +1243,20 @@ class CEFakeRepository : CERepositoryInterface {
                             null,
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/mt/Malta_50cent.jpg"
+                        ),
+                        CECoin(
+                            1.0,
+                            null,
+                            false,
+                            "https://www.ecb.europa.eu/euro/coins/common/shared/img/mt/Malta_1Euro.jpg"
                         )
                     ),
                     R.drawable.flag_default,
                     "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Flag_of_Malta.svg/800px-Flag_of_Malta.svg.png"
                 ),
                 CECountry(
-                    "Grecia", CECountry.getTag("Grecia"),
+                    CECountryConstants.Countries.GRECIA.itName,
+                    CECountryConstants.Countries.GRECIA.tag,
                     arrayListOf(
                         CECoin(
                             0.01,
@@ -1188,7 +1306,9 @@ class CEFakeRepository : CERepositoryInterface {
                             false,
                             "https://www.ecb.europa.eu/euro/coins/common/shared/img/gr/Greece_50cent.jpg"
                         )
-                    ), R.drawable.flag_default
+                    ),
+                    R.drawable.flag_default,
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Greece.svg/600px-Flag_of_Greece.svg.png"
                 )
             )
 
