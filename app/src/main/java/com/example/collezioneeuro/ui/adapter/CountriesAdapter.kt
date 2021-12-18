@@ -6,8 +6,11 @@ import android.widget.Filter
 import android.widget.Filterable
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
+import com.example.collezioneeuro.R
 import com.example.collezioneeuro.databinding.HolderCountryCardBinding
 import com.example.collezioneeuro.model.CECountry
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -67,13 +70,43 @@ class CountriesAdapter(
          */
         fun bind(ceCountry: CECountry) {
             binding.tvCountry.text = ceCountry.country
-            binding.ivFlag.setImageDrawable(ceCountry.drawableId?.let {
+            // imposta l'immagine della bandiera. Se c'è un url funzionante, imposta quella, altrimenti
+            // se c'è un'immagine scaricata imposta quella, altrimenti imposta la default
+            when {
+                ceCountry.drawableUrl != null -> setDrawableUrlIntoImageView(ceCountry)
+                ceCountry.drawableId != null -> setDrawableIdIntoImageView(ceCountry.drawableId)
+                else -> setDrawableIdIntoImageView(R.drawable.flag_default)
+            }
+            binding.tvCount.text = "${ceCountry.ownedCount()}/${ceCountry.coins.size}"
+        }
+
+        /**
+         * Imposta l'immagine della bandiera da url.
+         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default
+         */
+        private fun setDrawableUrlIntoImageView(ceCountry: CECountry) {
+            Picasso.get().load(ceCountry.drawableUrl).into(binding.ivFlag,
+                object : Callback {
+                    override fun onSuccess() {}
+                    override fun onError(e: Exception?) {
+                        when {
+                            ceCountry.drawableId != null -> setDrawableIdIntoImageView(ceCountry.drawableId)
+                            else -> setDrawableIdIntoImageView(R.drawable.flag_default)
+                        }
+                    }
+                })
+        }
+
+        /**
+         * Imposta l'immagine della bandiera dall'id del drawable passato
+         */
+        private fun setDrawableIdIntoImageView(id: Int) {
+            binding.ivFlag.setImageDrawable(
                 AppCompatResources.getDrawable(
                     binding.root.context,
-                    it
+                    id
                 )
-            })
-            binding.tvCount.text = "${ceCountry.ownedCount()}/${ceCountry.coins.size}"
+            )
         }
 
     }
