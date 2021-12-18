@@ -2,6 +2,7 @@ package com.example.collezioneeuro.model
 
 import android.os.Parcelable
 import com.example.collezioneeuro.R
+import com.example.collezioneeuro.model.CECountryConstants.Companion.countriesTag
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -14,58 +15,6 @@ data class CECountry(
 ) :
     Parcelable {
     companion object {
-        val countriesTag = arrayListOf(
-            Pair("Andorra", "AD"),
-            Pair("Austria", "AT"),
-            Pair("Belgio", "BE"),
-            Pair("Cipro", "CY"),
-            Pair("Città del Vaticano", "VA"),
-            Pair("Estonia", "ET"),
-            Pair("Finlandia", "FI"),
-            Pair("Francia", "FR"),
-            Pair("Francia", "AL"),
-            Pair("Germania", "DE"),
-            Pair("Grecia", "GR"),
-            Pair("Irlanda", "IE"),
-            Pair("Italia", "IT"),
-            Pair("Lettonia", "LV"),
-            Pair("Lituania", "LT"),
-            Pair("Lussemburgo", "LU"),
-            Pair("Malta", "MT"),
-            Pair("Paesi Bassi", "NL"),
-            Pair("Portogallo", "PT"),
-            Pair("Monaco", "MO"),
-            Pair("Repubblica di San Marino", "SM"),
-            Pair("Slovacchia", "SK"),
-            Pair("Slovenia", "SL"),
-            Pair("Spagna", "ES"),
-        )
-
-        val countriesEnglish = arrayListOf<Pair<String, String>>(
-            Pair("Andorra", "Andorra"),
-            Pair("Austria", "Austria"),
-            Pair("Belgio", "Belgium"),
-            Pair("Cipro", "Cyprus"),
-            Pair("Città del Vaticano", "the Vatican City"),
-            Pair("Estonia", "Estonia"),
-            Pair("Finlandia", "Finland"),
-            Pair("Francia", "France"),
-            Pair("Germania", "Germany"),
-            Pair("Grecia", "Greece"),
-            Pair("Irlanda", "Ireland"),
-            Pair("Italia", "Italy"),
-            Pair("Lettonia", "Latvia"),
-            Pair("Lituania", "Lithuania"),
-            Pair("Lussemburgo", "Luxembourg"),
-            Pair("Malta", "Malta"),
-            Pair("Paesi Bassi", "Netherlands"),
-            Pair("Portogallo", "Portugal"),
-            Pair("Monaco", "Monaco"),
-            Pair("Repubblica di San Marino", "San Marino"),
-            Pair("Slovacchia", "Slovakia"),
-            Pair("Slovenia", "Slovenia"),
-            Pair("Spagna", "Spain")
-        )
 
         fun createCoins(): ArrayList<CECoin> {
             val coins = arrayListOf(0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00)
