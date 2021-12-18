@@ -9,11 +9,12 @@ data class CECountry(
     val country: String,
     val countryTag: String,
     val coins: ArrayList<CECoin>,
-    val drawableId: Int?
+    val drawableId: Int? = null,
+    val drawableUrl: String? = null
 ) :
     Parcelable {
     companion object {
-        val countriesTag = arrayListOf<Pair<String, String>>(
+        val countriesTag = arrayListOf(
             Pair("Andorra", "AD"),
             Pair("Austria", "AT"),
             Pair("Belgio", "BE"),
@@ -40,6 +41,32 @@ data class CECountry(
             Pair("Spagna", "ES"),
         )
 
+        val countriesEnglish = arrayListOf<Pair<String, String>>(
+            Pair("Andorra", "Andorra"),
+            Pair("Austria", "Austria"),
+            Pair("Belgio", "Belgium"),
+            Pair("Cipro", "Cyprus"),
+            Pair("Città del Vaticano", "the Vatican City"),
+            Pair("Estonia", "Estonia"),
+            Pair("Finlandia", "Finland"),
+            Pair("Francia", "France"),
+            Pair("Germania", "Germany"),
+            Pair("Grecia", "Greece"),
+            Pair("Irlanda", "Ireland"),
+            Pair("Italia", "Italy"),
+            Pair("Lettonia", "Latvia"),
+            Pair("Lituania", "Lithuania"),
+            Pair("Lussemburgo", "Luxembourg"),
+            Pair("Malta", "Malta"),
+            Pair("Paesi Bassi", "Netherlands"),
+            Pair("Portogallo", "Portugal"),
+            Pair("Monaco", "Monaco"),
+            Pair("Repubblica di San Marino", "San Marino"),
+            Pair("Slovacchia", "Slovakia"),
+            Pair("Slovenia", "Slovenia"),
+            Pair("Spagna", "Spain")
+        )
+
         fun createCoins(): ArrayList<CECoin> {
             val coins = arrayListOf(0.01, 0.02, 0.05, 0.10, 0.20, 0.50, 1.00, 2.00)
             val ceCoins = ArrayList<CECoin>()
@@ -64,7 +91,7 @@ data class CECountry(
 @Parcelize
 data class CECoin(
     val value: Double,
-    var drawableId: Int?,
+    var drawableId: Int? = null,
     var owned: Boolean,
-    var drawableUrl: String?
+    var drawableUrl: String? = null
 ) : Parcelable
