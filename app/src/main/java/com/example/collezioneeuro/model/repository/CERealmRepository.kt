@@ -11,7 +11,8 @@ open class RealmCountry(
     var country: String = "",
     var countryTag: String = "",
     var coins: RealmList<RealmCoin> = RealmList(),
-    var drawableId: Int? = null
+    var drawableId: Int? = null,
+    var drawableUrl: String? = null
 ) : RealmObject()
 
 open class RealmCoin(
@@ -50,6 +51,7 @@ class CERealmRepository : CERepositoryInterface {
         realmCountry.countryTag = ceCountry.countryTag
         realmCountry.coins = mapCECoinsToRealmCoin(realm, ceCountry.coins)
         realmCountry.drawableId = ceCountry.drawableId
+        realmCountry.drawableUrl = ceCountry.drawableUrl
         return realmCountry
     }
 
@@ -85,7 +87,8 @@ class CERealmRepository : CERepositoryInterface {
                     ceCountry.country,
                     CECountry.getTag(ceCountry.country),
                     mapRealmCoinsToCECoins(ceCountry.coins),
-                    ceCountry.drawableId
+                    ceCountry.drawableId,
+                    ceCountry.drawableUrl
                 )
             )
         }
