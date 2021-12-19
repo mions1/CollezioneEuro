@@ -44,6 +44,16 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="CETextViewStatisticsTitleCardViewHolder" parent="CETitle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="CETextViewStatisticsTextCardViewHolder" parent="CESubtitle">
+        <item name="android:textAlignment">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
     <!-- Other -->
     <style name="CEDividerHolderCountry">
         <item name="android:layout_width">match_parent</item>
@@ -68,10 +78,18 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="CECardViewCountryCardViewHolder">
+    <style name="CECardView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="cardCornerRadius">4dp</item>
+        <item name="android:layout_marginLeft">@dimen/CEDefaultMarginLeft
+        </item>
+        <item name="android:layout_marginTop">@dimen/CEDefaultMarginTop</item>
+        <item name="android:layout_marginRight">@dimen/CEDefaultMarginTop</item>
+        <item name="android:layout_marginBottom">@dimen/CEDefaultMarginBottom</item>
+    </style>
+
+    <style name="CECardViewCountryCardViewHolder" parent="CECardView">
         <item name="android:layout_marginLeft">@dimen/CECardViewCountryCardViewHolderMarginLeft
         </item>
         <item name="android:layout_marginTop">@dimen/CECardViewCountryCardViewHolderMarginTop</item>
@@ -88,10 +106,7 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
-    <style name="CECardViewCoinCardViewHolder">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="cardCornerRadius">4dp</item>
+    <style name="CECardViewCoinCardViewHolder" parent="CECardView">
         <item name="android:layout_marginLeft">@dimen/CECardViewCountryCardViewHolderMarginLeft
         </item>
         <item name="android:layout_marginTop">@dimen/CECardViewCountryCardViewHolderMarginTop</item>
@@ -99,6 +114,18 @@
         </item>
         <item name="android:layout_marginBottom">
             @dimen/CECardViewCountryCardViewHolderMarginBottom
+        </item>
+    </style>
+
+    <style name="CECardViewStatisticsCardViewHolder" parent="CECardView">
+        <item name="android:layout_marginLeft">@dimen/CECardViewStatisticsCardViewHolderMarginLeft
+        </item>
+        <item name="android:layout_marginTop">@dimen/CECardViewStatisticsCardViewHolderMarginTop
+        </item>
+        <item name="android:layout_marginRight">@dimen/CECardViewStatisticsCardViewHolderMarginRight
+        </item>
+        <item name="android:layout_marginBottom">
+            @dimen/CECardViewStatisticsCardViewHolderMarginBottom
         </item>
     </style>
 

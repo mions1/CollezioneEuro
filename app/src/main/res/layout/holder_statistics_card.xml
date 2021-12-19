@@ -1,0 +1,27 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/holder"
+    style="@style/CECardViewStatisticsCardViewHolder">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/CETextViewStatisticsTitleCardViewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Title" />
+
+        <TextView
+            android:id="@+id/tvText"
+            style="@style/CETextViewStatisticsTextCardViewHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Text" />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

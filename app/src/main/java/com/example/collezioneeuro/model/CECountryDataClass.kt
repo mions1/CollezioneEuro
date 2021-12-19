@@ -4,6 +4,7 @@ import android.os.Parcelable
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.model.CECountryConstants.Companion.countriesTag
 import kotlinx.parcelize.Parcelize
+import kotlin.math.round
 
 @Parcelize
 data class CECountry(
@@ -30,6 +31,19 @@ data class CECountry(
                 return find.second
             return ""
         }
+    }
+
+    fun getTotal(): Double {
+        return round((getOwnedList().sumOf { it.value }) * 100) / 100
+    }
+
+    /**
+     * Restituisce la lista delle sole monete possedute della country
+     */
+    fun getOwnedList(): ArrayList<CECoin> {
+        val ownedList = ArrayList<CECoin>()
+        coins.forEach { if (it.owned) ownedList.add(it) }
+        return ownedList
     }
 
     fun ownedCount(): Int {

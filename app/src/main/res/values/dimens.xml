@@ -31,5 +31,11 @@
     <dimen name="CECardViewCountryCardViewHolderMarginRight">@dimen/CEDefaultMarginRight</dimen>
     <dimen name="CECardViewCountryCardViewHolderMarginBottom">@dimen/CEDefaultMarginBottom</dimen>
 
+    <dimen name="CECardViewStatisticsCardViewHolderMarginLeft">@dimen/CEDefaultMarginLeft</dimen>
+    <dimen name="CECardViewStatisticsCardViewHolderMarginTop">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="CECardViewStatisticsCardViewHolderMarginRight">@dimen/CEDefaultMarginRight</dimen>
+    <dimen name="CECardViewStatisticsCardViewHolderMarginBottom">@dimen/CEDefaultMarginBottom
+    </dimen>
+
     <dimen name="coin_owned_bar_height">4dp</dimen>
 </resources>
