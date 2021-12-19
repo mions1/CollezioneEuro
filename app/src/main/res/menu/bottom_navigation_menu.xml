@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/bnmHome"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_home"
+        android:title="@string/ce_bottom_navigation_menu_principale" />
+    <item
+        android:id="@+id/bnmStatistiche"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:title="@string/ce_bottom_navigation_menu_statistiche" />
+</menu>
