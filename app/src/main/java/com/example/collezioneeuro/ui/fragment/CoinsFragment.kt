@@ -19,12 +19,17 @@ import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.activity.ActivityInterface
 import com.example.collezioneeuro.ui.activity.MainActivity
 import com.example.collezioneeuro.ui.adapter.CoinsAdapter
+import com.example.collezioneeuro.ui.animation.CEAnimation
 
 /**
  * CoinsFragment mostra la lista di monete del paese selezionato.
  * Al click sulla moneta, consente di cambiarne lo stato di "owned".
  */
 class CoinsFragment : Fragment(), CEContract.View {
+
+    private lateinit var animator: CEAnimation
+    private var shortAnimationDuration: Int = 0
+    private var isZoomed: Boolean = false
 
     private lateinit var binding: FragmentCoinsBinding
     private lateinit var activityParent: ActivityInterface
@@ -60,6 +65,8 @@ class CoinsFragment : Fragment(), CEContract.View {
         repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
         presenter.bindView(this)
+
+        setAnimator()
     }
 
     override fun onCreateView(
@@ -77,6 +84,24 @@ class CoinsFragment : Fragment(), CEContract.View {
         initRecyclerView()
     }
 
+    private fun setAnimator() {
+        animator = CEAnimation(object : CEAnimation.AnimationListener {
+            override fun onAnimationStart() {
+                isZoomed = true
+            }
+
+            override fun onAnimationStop() {
+                isZoomed = false
+            }
+
+            override fun onAnimationCancel() {
+                isZoomed = false
+            }
+
+        })
+        shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime)
+    }
+
     private fun initRecyclerView() {
         // imposta le monete su 3 colonne
         val mLayoutManager: RecyclerView.LayoutManager = GridLayoutManager(context, 3)
@@ -88,8 +113,28 @@ class CoinsFragment : Fragment(), CEContract.View {
         binding.rvCoins.adapter =
             ceCountry?.coins?.let {
                 CoinsAdapter(it, object : CoinsAdapter.OnClickListener {
-                    override fun onClick(clicked: CECoin) {
-                        setOwned(clicked)
+                    override fun onClick(clickedView: View, clickedCoin: CECoin) {
+                        // imposta la moneta come owned se non è in corso l'ingrandimento
+                        if (!isZoomed)
+                            setOwned(clickedCoin)
+                        else
+                            animator.finishZoomImage(
+                                clickedView,
+                                binding.expandedImage,
+                                shortAnimationDuration.toLong()
+                            )
+                    }
+
+                    // Ingrandisci la moneta tenuta premuta avviando un'animazione
+                    override fun onLongClick(clickedView: View, clickedCoin: CECoin) {
+                        clickedCoin.drawableUrl?.let { it1 ->
+                            animator.startZoomImage(
+                                clickedView,
+                                binding.expandedImage,
+                                it1,
+                                shortAnimationDuration.toLong()
+                            )
+                        }
                     }
                 })
             }

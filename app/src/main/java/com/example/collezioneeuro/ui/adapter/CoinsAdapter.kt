@@ -1,6 +1,7 @@
 package com.example.collezioneeuro.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.recyclerview.widget.RecyclerView
@@ -22,7 +23,8 @@ class CoinsAdapter(
     private val adapterCoins = ArrayList(ceCoins.sortedBy { it.value })
 
     interface OnClickListener {
-        fun onClick(clicked: CECoin)
+        fun onClick(clickedView: View, clickedCoin: CECoin)
+        fun onLongClick(clickedView: View, clickedCoin: CECoin)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinsViewHolder =
@@ -50,9 +52,14 @@ class CoinsAdapter(
             onClickListener?.let { onClickIt ->
                 binding.holder.setOnClickListener {
                     onClickIt.onClick(
+                        binding.holder,
                         adapterCoins[adapterPosition]
                     )
                     notifyItemChanged(adapterPosition)
+                }
+                binding.holder.setOnLongClickListener {
+                    onClickIt.onLongClick(binding.holder, adapterCoins[adapterPosition])
+                    false
                 }
             }
         }

@@ -6,4 +6,5 @@
     <string name="cerca_per_nazione_hint">Cerca per nazione</string>
     <string name="ce_bottom_navigation_menu_principale">Principale</string>
     <string name="ce_bottom_navigation_menu_statistiche">Statistiche</string>
+    <string name="zoomed_coin_contentdescription">Zoomed Coin</string>
 </resources>
