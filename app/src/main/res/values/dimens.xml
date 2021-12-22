@@ -38,4 +38,33 @@
     </dimen>
 
     <dimen name="coin_owned_bar_height">4dp</dimen>
+
+    <!-- Shimmer -->
+    <dimen name="shimmer_standard_text_height">20dp</dimen>
+    <dimen name="shimmer_standard_text_width">100dp</dimen>
+
+    <dimen name="shimmer_standard_margin_top">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="shimmer_standard_margin_left">@dimen/CEDefaultMarginLeft</dimen>
+    <dimen name="shimmer_standard_margin_right">@dimen/CEDefaultMarginRight</dimen>
+    <dimen name="shimmer_standard_margin_bottom">@dimen/CEDefaultMarginBottom</dimen>
+
+
+    <dimen name="shimmer_flag_image_height">@dimen/flag_image_height</dimen>
+    <dimen name="shimmer_flag_image_width">@dimen/flag_image_width</dimen>
+
+    <dimen name="shimmer_country_text_height">@dimen/shimmer_standard_text_height</dimen>
+    <dimen name="shimmer_country_text_width">100dp</dimen>
+    <dimen name="shimmer_country_text_margin_top">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="shimmer_country_text_margin_bottom">@dimen/CEDefaultMarginBottom</dimen>
+
+    <dimen name="shimmer_count_text_height">@dimen/shimmer_standard_text_height</dimen>
+    <dimen name="shimmer_count_text_width">30dp</dimen>
+    <dimen name="shimmer_count_text_margin_top">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="shimmer_count_text_margin_bottom">@dimen/CEDefaultMarginBottom</dimen>
+    <dimen name="shimmer_count_text_margin_right">@dimen/CEDefaultMarginRight</dimen>
+
+    <dimen name="shimmer_value_text_height">@dimen/shimmer_standard_text_height</dimen>
+    <dimen name="shimmer_value_text_width">75dp</dimen>
+    <dimen name="shimmer_value_text_margin_top">@dimen/CEDefaultMarginTop</dimen>
+    <dimen name="shimmer_value_text_margin_bottom">5dp</dimen>
 </resources>

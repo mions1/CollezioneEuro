@@ -31,4 +31,6 @@
 
     <color name="coin_owned">@color/green</color>
     <color name="coin_no_owned">@color/red</color>
+
+    <color name="shimmer_color_grey">#aaaaaa</color>
 </resources>
