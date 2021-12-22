@@ -3,13 +3,18 @@ package com.example.collezioneeuro.ui.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.collezioneeuro.R
+import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.ActivityMainBinding
 import com.example.collezioneeuro.model.CECountry
+import com.example.collezioneeuro.model.repository.CEFakeRepository
+import com.example.collezioneeuro.model.repository.CERepositoryInterface
+import com.example.collezioneeuro.presenter.CEPresenter
+import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
 
-class MainActivity : AppCompatActivity(), ActivityInterface {
+class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
 
     enum class BottomNavigationItem() {
         HOME, STATISTICS
@@ -17,13 +22,20 @@ class MainActivity : AppCompatActivity(), ActivityInterface {
 
     lateinit var binding: ActivityMainBinding
 
+    private lateinit var repository: CERepositoryInterface
+    private lateinit var presenter: CEContract.Presenter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
-        //CEPresenter(RuntimeDispatcherProvider(), CEFakeRepository.SingleInstance).clear()
+        repository = CEFakeRepository.SingleInstance
+        presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
+        presenter.bindView(this)
+
+        presenter.getCountries()
 
         setBottomNavigatorClickListener()
         replaceFragmentToHomeFragment()
@@ -78,6 +90,11 @@ class MainActivity : AppCompatActivity(), ActivityInterface {
             .addToBackStack(CoinsFragment.TAG)
             .replace(binding.fragment.id, fragment, CoinsFragment.TAG)
             .commit()
+    }
+
+    override fun onGetCountries(countries: ArrayList<CECountry>) {
+        if (countries.isEmpty())
+            presenter.clear()
     }
 
 }
