@@ -1,6 +1,7 @@
 package com.example.collezioneeuro.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
@@ -64,12 +65,15 @@ class CountriesAdapter(
         }
 
         /**
-         * Imposta il testo dell'holder al nome dello stato
+         * Imposta il testo dell'holder al nome dello stato, l'immagine della bandiera, e il conteggio
+         * delle monete possedute.
+         * Inizia la shimmer animation fino a che i dati non vengono recuperati.
          *
          * @param ceCountry il paese da impostare
          */
         fun bind(ceCountry: CECountry) {
             binding.tvCountry.text = ceCountry.country
+            startshimmer()
             // imposta l'immagine della bandiera. Se c'è un url funzionante, imposta quella, altrimenti
             // se c'è un'immagine scaricata imposta quella, altrimenti imposta la default
             when {
@@ -81,17 +85,58 @@ class CountriesAdapter(
         }
 
         /**
+         * Inzia la shimmer:
+         *  1. Visualizza il layout shimmered
+         *  2. Nascondi il layout originale
+         *  3. Inizia l'animazione
+         */
+        private fun startshimmer() {
+            val shimmeredFrameLayout = binding.shimmerFrameLayout
+            val noshimmeredLayout = binding.llCountryCard
+
+            shimmeredFrameLayout.visibility = View.VISIBLE
+            noshimmeredLayout.visibility = View.GONE
+            shimmeredFrameLayout.startShimmerAnimation()
+        }
+
+        /**
+         * Ferma l'animazione shimmer:
+         *  1. Stoppa l'animazione
+         *  2. Nascondi il layout shimmered
+         *  3. Visualizza il layout originale
+         */
+        private fun stopshimmer() {
+            val shimmeredFrameLayout = binding.shimmerFrameLayout
+            val noshimmeredLayout = binding.llCountryCard
+
+            shimmeredFrameLayout.stopShimmerAnimation()
+            shimmeredFrameLayout.visibility = View.GONE
+            noshimmeredLayout.visibility = View.VISIBLE
+        }
+
+        /**
          * Imposta l'immagine della bandiera da url.
-         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default
+         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default.
+         * Quando la bandiera viene impostata, lo shimmer viene fermato.
          */
         private fun setDrawableUrlIntoImageView(ceCountry: CECountry) {
-            Picasso.get().load(ceCountry.drawableUrl).into(binding.ivFlag,
+            Picasso.get().load(ceCountry.drawableUrl).into(
+                binding.ivFlag,
                 object : Callback {
-                    override fun onSuccess() {}
+                    override fun onSuccess() {
+                        stopshimmer()
+                    }
+
                     override fun onError(e: Exception?) {
                         when {
-                            ceCountry.drawableId != null -> setDrawableIdIntoImageView(ceCountry.drawableId)
-                            else -> setDrawableIdIntoImageView(R.drawable.flag_default)
+                            ceCountry.drawableId != null -> {
+                                setDrawableIdIntoImageView(ceCountry.drawableId)
+                                stopshimmer()
+                            }
+                            else -> {
+                                setDrawableIdIntoImageView(R.drawable.flag_default)
+                                stopshimmer()
+                            }
                         }
                     }
                 })

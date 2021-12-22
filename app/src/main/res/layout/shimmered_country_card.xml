@@ -1,0 +1,31 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llShrimmeredCountryCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/tvShimmeredCountry"
+        android:layout_width="@dimen/shimmer_country_text_width"
+        android:layout_height="@dimen/shimmer_country_text_height"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/shimmer_country_text_margin_top"
+        android:layout_marginBottom="@dimen/shimmer_country_text_margin_bottom"
+        android:background="@color/shimmer_color_grey" />
+
+    <View
+        android:id="@+id/ivShrimmeredFlag"
+        style="@style/CEImageViewFlagCardViewHolder"
+        android:background="@color/shimmer_color_grey" />
+
+    <View
+        android:id="@+id/tvShrimmeredCount"
+        android:layout_width="@dimen/shimmer_count_text_width"
+        android:layout_height="15dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/shimmer_count_text_margin_top"
+        android:layout_marginEnd="@dimen/shimmer_count_text_margin_right"
+        android:layout_marginBottom="@dimen/shimmer_count_text_margin_bottom"
+        android:background="@color/shimmer_color_grey" />
+
+</LinearLayout>

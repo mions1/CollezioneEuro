@@ -3,7 +3,17 @@
     android:id="@+id/holder"
     style="@style/CECardViewCountryCardViewHolder">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/shimmered_country_card" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <LinearLayout
+        android:id="@+id/llCountryCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
