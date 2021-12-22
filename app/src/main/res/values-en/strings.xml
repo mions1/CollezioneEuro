@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Euro Collection</string>
+    <string name="holder_country_arrow_right_contentdescription">Go to details</string>
+    <string name="coin_contentdescription">Coin</string>
+    <string name="flag_contentdescription">Flag</string>
+    <string name="cerca_per_nazione_hint">Search by country name</string>
+    <string name="ce_bottom_navigation_menu_principale">Home</string>
+    <string name="ce_bottom_navigation_menu_statistiche">Statistics</string>
+    <string name="zoomed_coin_contentdescription">Zoomed Coin</string>
+    <string name="statistic_title_total_value_of_owned_coins">Total value of owned coins</string>
+    <string name="statistic_title_total_owned_coins">Total owned coins</string>
+</resources>

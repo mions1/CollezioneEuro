@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentStatisticsBinding
 import com.example.collezioneeuro.model.CECountry
@@ -89,10 +90,13 @@ class StatisticsFragment : Fragment(), CEContract.View {
     private fun computeStatistics(countries: ArrayList<CECountry>): ArrayList<Statistics> {
         return arrayListOf(
             Statistics(
-                "Totale valore monete possedute:",
+                "${getString(R.string.statistic_title_total_value_of_owned_coins)}:",
                 getTotalValue(countries).toString() + "€"
             ),
-            Statistics("Totale monete possedute:", getTotalOwned(countries).toString())
+            Statistics(
+                "${getString(R.string.statistic_title_total_owned_coins)}:",
+                getTotalOwned(countries).toString()
+            )
         )
     }
 

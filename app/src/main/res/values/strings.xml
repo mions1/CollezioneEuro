@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">CollezioneEuro</string>
+    <string name="app_name">Collezione Euro</string>
     <string name="holder_country_arrow_right_contentdescription">Go to details</string>
     <string name="coin_contentdescription">Coin</string>
     <string name="flag_contentdescription">Flag</string>
@@ -7,4 +7,6 @@
     <string name="ce_bottom_navigation_menu_principale">Principale</string>
     <string name="ce_bottom_navigation_menu_statistiche">Statistiche</string>
     <string name="zoomed_coin_contentdescription">Zoomed Coin</string>
+    <string name="statistic_title_total_value_of_owned_coins">Valore totale delle monete possedute</string>
+    <string name="statistic_title_total_owned_coins">Totale monete possedute</string>
 </resources>
