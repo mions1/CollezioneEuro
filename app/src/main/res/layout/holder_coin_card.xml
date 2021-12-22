@@ -3,7 +3,17 @@
     android:id="@+id/holder"
     style="@style/CECardViewCoinCardViewHolder">
 
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerFrameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+
+        <include layout="@layout/shimmered_coin_card" />
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
     <LinearLayout
+        android:id="@+id/llCoinCard"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">

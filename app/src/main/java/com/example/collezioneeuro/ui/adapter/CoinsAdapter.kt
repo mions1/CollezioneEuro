@@ -70,10 +70,12 @@ class CoinsAdapter(
          *     2. l'immagine della moneta
          *     3. il colore che mostra lo stato di owned
          *
+         * Inoltre, inizia la shimmer animation fino a che non vengono recuperati i dati
          * @param ceCoin la moneta da impostare
          */
         fun bind(ceCoin: CECoin) {
             binding.tvValue.text = "${ceCoin.value} €"
+            startShimmer()
             when {
                 ceCoin.drawableUrl != null -> setDrawableUrlIntoImageView(ceCoin)
                 ceCoin.drawableId != null -> setDrawableIdIntoImageView(ceCoin.drawableId!!)
@@ -88,17 +90,58 @@ class CoinsAdapter(
         }
 
         /**
+         * Inzia la shimmer:
+         *  1. Visualizza il layout shimmered
+         *  2. Nascondi il layout originale
+         *  3. Inizia l'animazione
+         */
+        private fun startShimmer() {
+            val shimmeredFrameLayout = binding.shimmerFrameLayout
+            val noShimmeredLayout = binding.llCoinCard
+
+            shimmeredFrameLayout.visibility = View.VISIBLE
+            noShimmeredLayout.visibility = View.GONE
+            shimmeredFrameLayout.startShimmerAnimation()
+        }
+
+        /**
+         * Ferma l'animazione shimmer:
+         *  1. Stoppa l'animazione
+         *  2. Nascondi il layout shimmered
+         *  3. Visualizza il layout originale
+         */
+        private fun stopShimmer() {
+            val shimmeredFrameLayout = binding.shimmerFrameLayout
+            val noshimmeredLayout = binding.llCoinCard
+
+            shimmeredFrameLayout.stopShimmerAnimation()
+            shimmeredFrameLayout.visibility = View.GONE
+            noshimmeredLayout.visibility = View.VISIBLE
+        }
+
+        /**
          * Imposta l'immagine della moneta da url.
-         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default
+         * Se non funziona, prova prima ad impostarla da id preso dalla country, altrimenti la default.
+         * Quando la moneta è stata impostata, lo shimmer viene fermato.
          */
         private fun setDrawableUrlIntoImageView(ceCoin: CECoin) {
-            Picasso.get().load(ceCoin.drawableUrl).into(binding.ivCoin,
+            Picasso.get().load(ceCoin.drawableUrl).into(
+                binding.ivCoin,
                 object : Callback {
-                    override fun onSuccess() {}
+                    override fun onSuccess() {
+                        stopShimmer()
+                    }
+
                     override fun onError(e: Exception?) {
                         when {
-                            ceCoin.drawableId != null -> setDrawableIdIntoImageView(ceCoin.drawableId!!)
-                            else -> setDrawableIdIntoImageView(R.drawable.coin_default)
+                            ceCoin.drawableId != null -> {
+                                setDrawableIdIntoImageView(ceCoin.drawableId!!)
+                                stopShimmer()
+                            }
+                            else -> {
+                                setDrawableIdIntoImageView(R.drawable.coin_default)
+                                stopShimmer()
+                            }
                         }
                     }
                 })

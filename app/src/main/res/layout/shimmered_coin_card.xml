@@ -1,0 +1,21 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llShimmeredCoinCard"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/ivShimmeredCoin"
+        style="@style/CEImageViewCoinCardViewHolder"
+        android:background="@color/shimmer_color_grey" />
+
+    <View
+        android:id="@+id/tvShimmeredValue"
+        android:layout_width="@dimen/shimmer_value_text_width"
+        android:layout_height="@dimen/shimmer_value_text_height"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/shimmer_value_text_margin_top"
+        android:layout_marginBottom="@dimen/shimmer_value_text_margin_bottom"
+        android:background="@color/shimmer_color_grey" />
+
+</LinearLayout>
