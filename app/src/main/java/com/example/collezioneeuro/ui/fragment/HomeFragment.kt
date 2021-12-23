@@ -96,8 +96,12 @@ class HomeFragment : Fragment(), CEContract.View {
     }
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
-        this.ceCountries = countries
-        setRecyclerViewAdapter(countries)
+        if (countries.isEmpty()) {
+            presenter.getCountries()
+        } else {
+            this.ceCountries = countries
+            setRecyclerViewAdapter(countries)
+        }
     }
 
 }
