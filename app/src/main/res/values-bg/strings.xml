@@ -4,7 +4,7 @@
     <string name="coin_contentdescription">монета</string>
     <string name="flag_contentdescription">Флаг</string>
     <string name="cerca_per_nazione_hint">Търсене по държава</string>
-    <string name="ce_bottom_navigation_menu_principale">У дома</string>
+    <string name="ce_bottom_navigation_menu_principale">Homepage</string>
     <string name="ce_bottom_navigation_menu_statistiche">Статистика</string>
     <string name="zoomed_coin_contentdescription">Увеличена монета</string>
     <string name="statistic_title_total_value_of_owned_coins">обща стойност на притежаваните монети</string>
