@@ -1,7 +1,9 @@
 package com.example.collezioneeuro.ui.activity
 
 import android.os.Bundle
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.ActivityMainBinding
@@ -14,10 +16,18 @@ import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
 
-class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
+class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityInterface,
+    CEContract.View {
 
     enum class BottomNavigationItem() {
         HOME, STATISTICS
+    }
+
+    /**
+     * Indica il tipo di bottone visualizzato al momento nell'action bar a sx
+     */
+    enum class ActionBarIconStatus {
+        BURGER, BACK, NONE
     }
 
     lateinit var binding: ActivityMainBinding
@@ -25,11 +35,14 @@ class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
     private lateinit var repository: CERepositoryInterface
     private lateinit var presenter: CEContract.Presenter
 
+    private var actionBarIconStatus: ActionBarIconStatus = ActionBarIconStatus.NONE
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        setSupportActionBar(binding.mainToolbar) // imposta la mia toolbar come actiontoolbar
 
         repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
@@ -37,10 +50,18 @@ class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
 
         presenter.getCountries()
 
+        setNavigationDrawer()
         setBottomNavigatorClickListener()
         replaceFragmentToHomeFragment()
     }
 
+
+    /* ------------------ Bottom Navigator methods ---------------------- */
+
+    /**
+     * Gestisce il comportamento dei bottoni premuti nel menù in basso
+     * Aggiungere qui il comportamento di eventuali nuovi bottoni
+     */
     private fun setBottomNavigatorClickListener() {
         binding.bottomNavigation.setOnItemSelectedListener {
             when (it.itemId) {
@@ -69,6 +90,9 @@ class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
         }
     }
 
+
+    /* ---------------- ReplaceFragment methods ------------------------ */
+
     private fun replaceFragmentToStatisticsFragment() {
         val fragment = StatisticsFragment.newInstance()
         supportFragmentManager.beginTransaction()
@@ -91,6 +115,92 @@ class MainActivity : AppCompatActivity(), ActivityInterface, CEContract.View {
             .replace(binding.fragment.id, fragment, CoinsFragment.TAG)
             .commit()
     }
+
+
+    /* ------------------------------ Toolbar and drawer methods -------------------------------- */
+    /**
+     * Imposta il titolo della toolbar
+     */
+    override fun setActionBarTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    /**
+     * Imposta il sottotitolo della toolbar
+     */
+    override fun setActionBarSubtitle(subtitle: String) {
+        supportActionBar?.subtitle = subtitle
+    }
+
+    /**
+     * Imposta il pulsante burger menu ed abilita il menu
+     */
+    override fun enableDrawer() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true) // mostra il bottone
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.burger_menu)
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+        actionBarIconStatus = ActionBarIconStatus.BURGER
+    }
+
+    /**
+     * Disabilita il menu e nasconde il pulsante
+     */
+    override fun disableDrawer() {
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        actionBarIconStatus = ActionBarIconStatus.NONE
+    }
+
+    /**
+     * Imposta la freccia indietro invece che il menu
+     */
+    override fun setBackArrow() {
+        disableDrawer()
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.arrow_back)
+        actionBarIconStatus = ActionBarIconStatus.BACK
+    }
+
+    /**
+     * Imposta il navigation drawer (menù a scomparsa laterale).
+     * Imposta il listener per gestire apertura, chiusura, bottone.
+     * Gestisce alla selezione di uno dei bottoni del menù
+     */
+    private fun setNavigationDrawer() {
+        val actionBarToggle = ActionBarDrawerToggle(this, binding.drawerLayout, 0, 0)
+
+        binding.drawerLayout.addDrawerListener(actionBarToggle)
+        actionBarToggle.syncState() // aggiorna il bottone in apertura e chiusura della drawer
+
+        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        binding.navView.setNavigationItemSelectedListener {
+            when (it.itemId) {
+                // aggiungi qui la gestione al click delle varie voci del menù
+                else -> false
+            }
+        }
+    }
+
+    /**
+     * Gestisce, in base al bottone impostato al momento del click, il comportamento da effettuare
+     */
+    override fun onSupportNavigateUp(): Boolean {
+        return when (actionBarIconStatus) {
+            ActionBarIconStatus.BURGER -> {
+                binding.drawerLayout.openDrawer(binding.navView)
+                true
+            }
+            ActionBarIconStatus.BACK -> {
+                this.onBackPressed()
+                true
+            }
+            ActionBarIconStatus.NONE -> {
+                false
+            }
+        }
+    }
+
+    /* --------------- Other methods ---------------------- */
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
         if (countries.isEmpty())
