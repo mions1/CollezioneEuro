@@ -9,4 +9,5 @@
     <string name="zoomed_coin_contentdescription">Увеличена монета</string>
     <string name="statistic_title_total_value_of_owned_coins">обща стойност на притежаваните монети</string>
     <string name="statistic_title_total_owned_coins">Общо притежавани монети</string>
+    <string name="bandiera_europa_contentdescription">Europe Flag</string>
 </resources>

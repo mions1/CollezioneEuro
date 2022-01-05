@@ -9,4 +9,5 @@
     <string name="zoomed_coin_contentdescription">Zoomed Coin</string>
     <string name="statistic_title_total_value_of_owned_coins">Total value of owned coins</string>
     <string name="statistic_title_total_owned_coins">Total owned coins</string>
+    <string name="bandiera_europa_contentdescription">Europe Flag</string>
 </resources>
