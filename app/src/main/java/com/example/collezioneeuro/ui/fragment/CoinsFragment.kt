@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentCoinsBinding
 import com.example.collezioneeuro.model.CECoin
@@ -16,6 +17,7 @@ import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
 import com.example.collezioneeuro.presenter.CEPresenter
 import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
+import com.example.collezioneeuro.ui.activity.ActionBarActivityInterface
 import com.example.collezioneeuro.ui.activity.ActivityInterface
 import com.example.collezioneeuro.ui.activity.MainActivity
 import com.example.collezioneeuro.ui.adapter.CoinsAdapter
@@ -82,6 +84,17 @@ class CoinsFragment : Fragment(), CEContract.View {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setupActionBar()
+    }
+
+    private fun setupActionBar() {
+        (activity as? ActionBarActivityInterface)?.setBackArrow()
+        (activity as? ActionBarActivityInterface)?.setActionBarTitle(getString(R.string.app_name))
+        ceCountry?.country?.let { (activity as? ActionBarActivityInterface)?.setActionBarSubtitle(it) }
     }
 
     private fun setAnimator() {

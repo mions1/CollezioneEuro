@@ -9,6 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentHomeBinding
 import com.example.collezioneeuro.model.CECountry
@@ -16,6 +17,7 @@ import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
 import com.example.collezioneeuro.presenter.CEPresenter
 import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
+import com.example.collezioneeuro.ui.activity.ActionBarActivityInterface
 import com.example.collezioneeuro.ui.activity.ActivityInterface
 import com.example.collezioneeuro.ui.activity.MainActivity
 import com.example.collezioneeuro.ui.adapter.CountriesAdapter
@@ -56,6 +58,11 @@ class HomeFragment : Fragment(), CEContract.View {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupActionBar()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -63,6 +70,12 @@ class HomeFragment : Fragment(), CEContract.View {
         initRecyclerView()
 
         setSearchViewListener()
+    }
+
+    private fun setupActionBar() {
+        (activity as? ActionBarActivityInterface)?.enableDrawer()
+        (activity as? ActionBarActivityInterface)?.setActionBarTitle(getString(R.string.app_name))
+        (activity as? ActionBarActivityInterface)?.setActionBarSubtitle("")
     }
 
     private fun initRecyclerView() {
