@@ -28,6 +28,14 @@ class CEExportFileUtils(context: Context) : CEFileUtils(context) {
     }
 
     /**
+     * Crea, salva e condivide il file da esportare, quello che salva lo stato delle countries (quindi le monete owned).
+     */
+    fun shareExportFile(jsonExport: String) {
+        val file = saveExportFile(jsonExport)
+        shareFile(file, "text/json")
+    }
+
+    /**
      * Crea e salva il file da esportare, quello che salva lo stato delle countries (quindi le monete owned).
      * Ritorna il file salvato
      */
@@ -37,6 +45,20 @@ class CEExportFileUtils(context: Context) : CEFileUtils(context) {
         return when {
             directory != null -> {
                 saveTextFile(directory, DefaultFileName.EXPORT.text, jsonCountries)
+            }
+            else -> context.filesDir
+        }
+    }
+
+    /**
+     * Crea e salva il file da esportare, quello che salva lo stato delle countries (quindi le monete owned).
+     * Ritorna il file salvato
+     */
+    fun saveExportFile(jsonExport: String): File {
+        val directory = getDirectory(Directory.EXTERNAL_FILES)
+        return when {
+            directory != null -> {
+                saveTextFile(directory, DefaultFileName.EXPORT.text, jsonExport)
             }
             else -> context.filesDir
         }
