@@ -7,6 +7,7 @@
 
     <ImageView
         android:id="@+id/headerImage"
+        android:layout_marginTop="@dimen/nav_drawer_header_margin_top"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/bandiera_europa_contentdescription"

@@ -39,6 +39,8 @@
 
     <dimen name="coin_owned_bar_height">4dp</dimen>
 
+    <dimen name="nav_drawer_header_margin_top">@dimen/CEDefaultMarginTop</dimen>
+
     <!-- Shimmer -->
     <dimen name="shimmer_standard_text_height">20dp</dimen>
     <dimen name="shimmer_standard_text_width">100dp</dimen>
