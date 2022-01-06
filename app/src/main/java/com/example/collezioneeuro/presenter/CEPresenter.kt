@@ -51,7 +51,7 @@ class CEPresenter(
     override fun getCountries() {
         launch {
             val countries = repository.getCountries()
-            view?.onGetCountries(countries)
+            view?.onGetCountries(ArrayList(countries.sortedBy { it.country }))
         }
     }
 
