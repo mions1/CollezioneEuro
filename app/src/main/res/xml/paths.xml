@@ -1,0 +1,8 @@
+<paths>
+    <root-path
+        name="root"
+        path="." />
+    <files-path
+        name="export"
+        path="." />
+</paths>

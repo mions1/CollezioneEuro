@@ -10,4 +10,6 @@
     <string name="statistic_title_total_value_of_owned_coins">обща стойност на притежаваните монети</string>
     <string name="statistic_title_total_owned_coins">Общо притежавани монети</string>
     <string name="bandiera_europa_contentdescription">Europe Flag</string>
+    <string name="esporta_drawer_main_menu">Export</string>
+    <string name="toast_file_salvato_in">File saved in</string>
 </resources>
