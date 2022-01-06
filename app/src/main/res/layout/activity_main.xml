@@ -18,10 +18,21 @@
             android:background="?attr/colorPrimary" />
 
         <FrameLayout
-            android:id="@+id/fragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_weight="1">
+
+            <FrameLayout
+                android:id="@+id/fragment"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <include
+                android:id="@+id/includeProgressBar"
+                layout="@layout/include_indeterminate_progress_bar_overlay" />
+
+        </FrameLayout>
+
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
