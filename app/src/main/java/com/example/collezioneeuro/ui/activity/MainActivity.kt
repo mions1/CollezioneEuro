@@ -2,6 +2,7 @@ package com.example.collezioneeuro.ui.activity
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -17,9 +18,11 @@ import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
 import com.example.collezioneeuro.utils.fileutils.CEExportFileUtils
+import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsContract
+import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsPresenter
 
 class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityInterface,
-    CEContract.View {
+    CEContract.View, CEJsonUtilsContract.View {
 
     enum class BottomNavigationItem() {
         HOME, STATISTICS
@@ -36,6 +39,7 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
 
     private lateinit var repository: CERepositoryInterface
     private lateinit var presenter: CEContract.Presenter
+    private lateinit var jsonUtilsPresenter: CEJsonUtilsContract.Presenter
 
     private val countries: ArrayList<CECountry> = ArrayList()
 
@@ -51,6 +55,8 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
         presenter.bindView(this)
+        jsonUtilsPresenter = CEJsonUtilsPresenter(RuntimeDispatcherProvider())
+        jsonUtilsPresenter.bindView(this)
 
         presenter.getCountries()
 
@@ -193,13 +199,21 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         }
     }
 
+    private fun openDrawer() {
+        binding.drawerLayout.openDrawer(binding.navView)
+    }
+
+    private fun closeDrawer() {
+        binding.drawerLayout.closeDrawer(binding.navView)
+    }
+
     /**
      * Gestisce, in base al bottone impostato al momento del click, il comportamento da effettuare
      */
     override fun onSupportNavigateUp(): Boolean {
         return when (actionBarIconStatus) {
             ActionBarIconStatus.BURGER -> {
-                binding.drawerLayout.openDrawer(binding.navView)
+                openDrawer()
                 true
             }
             ActionBarIconStatus.BACK -> {
@@ -232,11 +246,29 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
     }
 
     /**
+     * Quando il json è pronto, nasconde la progress bar e lo esporta
+     */
+    override fun onGetJson(json: String) {
+        val ceExportFileUtils = CEExportFileUtils(this)
+        hideProgressBar()
+        ceExportFileUtils.shareExportFile(json)
+    }
+
+    /**
      * Salva e condividi l'export
      */
     private fun shareExport() {
-        val ceExportFileUtils = CEExportFileUtils(this)
-        ceExportFileUtils.shareExportFile(countries)
+        closeDrawer()
+        showProgressBar()
+        jsonUtilsPresenter.getJsonCountries(countries)
+    }
+
+    private fun showProgressBar() {
+        binding.includeProgressBar.progressOverlay.visibility = View.VISIBLE
+    }
+
+    private fun hideProgressBar() {
+        binding.includeProgressBar.progressOverlay.visibility = View.GONE
     }
 
 }

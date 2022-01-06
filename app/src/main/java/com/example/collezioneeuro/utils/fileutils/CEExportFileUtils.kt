@@ -2,7 +2,7 @@ package com.example.collezioneeuro.utils.fileutils
 
 import android.content.Context
 import com.example.collezioneeuro.model.CECountry
-import com.example.collezioneeuro.utils.CEJsonUtils
+import com.example.collezioneeuro.utils.jsonutils.CEJsonUtils
 import java.io.File
 
 /**
