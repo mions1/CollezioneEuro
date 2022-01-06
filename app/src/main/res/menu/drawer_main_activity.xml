@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Aggiungi qui nuove voci al menù -->
+    <group>
+        <item
+            android:id="@+id/dmExport"
+            android:icon="@drawable/import_export"
+            android:title="@string/esporta_drawer_main_menu" />
+    </group>
 </menu>

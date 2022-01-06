@@ -6,6 +6,8 @@ interface ActivityInterface {
 
     fun setWhichItemIsSelectedBottomNavigationMenu(item: MainActivity.BottomNavigationItem)
 
+    fun updateCountries(countries: ArrayList<CECountry>)
+
     fun replaceFragmentToHomeFragment()
     fun replaceFragmentToCoinsFragment(ceCountry: CECountry)
 

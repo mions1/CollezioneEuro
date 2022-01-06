@@ -114,6 +114,7 @@ class HomeFragment : Fragment(), CEContract.View {
         } else {
             this.ceCountries = countries
             setRecyclerViewAdapter(countries)
+            activityParent.updateCountries(countries)
         }
     }
 

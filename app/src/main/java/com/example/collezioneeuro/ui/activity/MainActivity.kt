@@ -1,6 +1,7 @@
 package com.example.collezioneeuro.ui.activity
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -15,6 +16,7 @@ import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
+import com.example.collezioneeuro.utils.fileutils.CEExportFileUtils
 
 class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityInterface,
     CEContract.View {
@@ -34,6 +36,8 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
 
     private lateinit var repository: CERepositoryInterface
     private lateinit var presenter: CEContract.Presenter
+
+    private val countries: ArrayList<CECountry> = ArrayList()
 
     private var actionBarIconStatus: ActionBarIconStatus = ActionBarIconStatus.NONE
 
@@ -172,10 +176,18 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         binding.drawerLayout.addDrawerListener(actionBarToggle)
         actionBarToggle.syncState() // aggiorna il bottone in apertura e chiusura della drawer
 
-        binding.drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        disableDrawer()
+
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
+                R.id.dmExport -> {
+                    shareExport()
+                    Log.println(Log.DEBUG, "[MainActivity]", "[NavUi] - export pressed")
+                    true
+                }
+
                 // aggiungi qui la gestione al click delle varie voci del menù
+
                 else -> false
             }
         }
@@ -205,6 +217,26 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
     override fun onGetCountries(countries: ArrayList<CECountry>) {
         if (countries.isEmpty())
             presenter.clear()
+        else {
+            this.countries.clear()
+            this.countries.addAll(countries)
+        }
+    }
+
+    /**
+     * Aggiorna la variabile locale countries
+     */
+    override fun updateCountries(countries: ArrayList<CECountry>) {
+        this.countries.clear()
+        this.countries.addAll(countries)
+    }
+
+    /**
+     * Salva e condividi l'export
+     */
+    private fun shareExport() {
+        val ceExportFileUtils = CEExportFileUtils(this)
+        ceExportFileUtils.shareExportFile(countries)
     }
 
 }
