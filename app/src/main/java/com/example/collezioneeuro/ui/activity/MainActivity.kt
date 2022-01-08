@@ -9,22 +9,28 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.ActivityMainBinding
+import com.example.collezioneeuro.listener.UpdateCountriesListener
 import com.example.collezioneeuro.model.CECountry
 import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
 import com.example.collezioneeuro.presenter.CEPresenter
 import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.activity.activityresultcontract.CreateFileActivityResultContract
+import com.example.collezioneeuro.ui.activity.activityresultcontract.OpenFileActivityResultContract
 import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
+import com.example.collezioneeuro.utils.fileutils.CEFileUtils
 import com.example.collezioneeuro.utils.fileutils.CEWrapperExportFileUtils
 import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsContract
 import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsPresenter
 
 class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityInterface,
-    CEContract.View, CEJsonUtilsContract.View {
+    CEContract.View, CEJsonUtilsContract.View, UpdateCountriesListener {
 
+    /**
+     * Gestione dei bottoni della bottom navigation
+     */
     enum class BottomNavigationItem() {
         HOME, STATISTICS
     }
@@ -194,6 +200,11 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
                     Log.println(Log.DEBUG, "[MainActivity]", "[NavUi] - export pressed")
                     true
                 }
+                R.id.dmImport -> {
+                    import()
+                    Log.println(Log.DEBUG, "[MainActivity]", "[NavUi] - import pressed")
+                    true
+                }
 
                 // aggiungi qui la gestione al click delle varie voci del menù
 
@@ -255,11 +266,39 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         )
     }
 
+    /**
+     * Quando il json è stato letto, nasconde la progress bar e salva nel repo le countries appena importate
+     */
+    override fun onReadJson(ceCountries: ArrayList<CECountry>) {
+        presenter.clearAndSet(ceCountries)
+        onUpdateCountries(ceCountries)
+        // dico a tutti i fragment che osservano la lista che è stata aggiornata
+        val fragments = supportFragmentManager.fragments
+        for (fragment in fragments)
+            (fragment as? UpdateCountriesListener)?.onUpdateCountries(ceCountries)
+        hideProgressBar()
+    }
+
+    /**
+     * Importa il json
+     */
+    private fun import() {
+        closeDrawer()
+        showProgressBar()
+        launchActivityOpenExportedFile.launch(
+            OpenFileActivityResultContract.newIntent()
+        )
+    }
+
     /* --------------- Other methods ---------------------- */
 
+    /**
+     * Quando recupero le countries dal repo, se non sono vuote le imposto come variabili cosi da poterle
+     * usare
+     */
     override fun onGetCountries(countries: ArrayList<CECountry>) {
         if (countries.isEmpty())
-            presenter.clear()
+            presenter.clearAndSet(CEFakeRepository.getOriginalCountries())
         else {
             this.countries.clear()
             this.countries.addAll(countries)
@@ -269,9 +308,9 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
     /**
      * Aggiorna la variabile locale countries
      */
-    override fun updateCountries(countries: ArrayList<CECountry>) {
+    override fun onUpdateCountries(ceCountries: ArrayList<CECountry>) {
         this.countries.clear()
-        this.countries.addAll(countries)
+        this.countries.addAll(ceCountries)
     }
 
     private fun showProgressBar() {
@@ -300,6 +339,24 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
                         "[onActivityResult] [createExportFile] - $uri $jsonText"
                     )
                 }
+            }
+        }
+
+    /**
+     * Gestisce il ritorno dall'activity che apre il file json esportato.
+     * L'activity apre il file, poi prendo il contenuto e lo deserializzo.
+     * Poi verrà chiamato onReadJson e quello penserà a salvare le countries importate
+     */
+    private val launchActivityOpenExportedFile =
+        registerForActivityResult(OpenFileActivityResultContract()) { result ->
+            result?.data?.let { uri ->
+                val text =
+                    jsonUtilsPresenter.readCountryJson(CEFileUtils.readTextFromUri(this, uri))
+                Log.println(
+                    Log.DEBUG,
+                    "[MainActivity]",
+                    "[onActivityResult] [createExportFile] - $uri $text"
+                )
             }
         }
 }

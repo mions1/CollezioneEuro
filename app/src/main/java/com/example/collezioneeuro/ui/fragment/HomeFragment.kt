@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.collezioneeuro.R
 import com.example.collezioneeuro.contract.CEContract
 import com.example.collezioneeuro.databinding.FragmentHomeBinding
+import com.example.collezioneeuro.listener.UpdateCountriesListener
 import com.example.collezioneeuro.model.CECountry
 import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
@@ -22,7 +23,7 @@ import com.example.collezioneeuro.ui.activity.ActivityInterface
 import com.example.collezioneeuro.ui.activity.MainActivity
 import com.example.collezioneeuro.ui.adapter.CountriesAdapter
 
-class HomeFragment : Fragment(), CEContract.View {
+class HomeFragment : Fragment(), CEContract.View, UpdateCountriesListener {
 
     private lateinit var binding: FragmentHomeBinding
     private lateinit var activityParent: ActivityInterface
@@ -114,8 +115,16 @@ class HomeFragment : Fragment(), CEContract.View {
         } else {
             this.ceCountries = countries
             setRecyclerViewAdapter(countries)
-            activityParent.updateCountries(countries)
+            (activityParent as? UpdateCountriesListener)?.onUpdateCountries(countries)
         }
+    }
+
+    /**
+     * Listener per l'aggiornamento delle countries
+     */
+    override fun onUpdateCountries(ceCountries: ArrayList<CECountry>) {
+        this.ceCountries = ceCountries
+        setRecyclerViewAdapter(ceCountries)
     }
 
 }
