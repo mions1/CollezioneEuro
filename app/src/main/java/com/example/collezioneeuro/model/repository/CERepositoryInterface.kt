@@ -10,6 +10,7 @@ interface CERepositoryInterface {
     suspend fun editCountry(oldCountry: CECountry, newCountry: CECountry)
     suspend fun getCountries(): ArrayList<CECountry>
     suspend fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean)
+    suspend fun clearAndSet(ceCountries: ArrayList<CECountry>)
     suspend fun clear()
 
 }

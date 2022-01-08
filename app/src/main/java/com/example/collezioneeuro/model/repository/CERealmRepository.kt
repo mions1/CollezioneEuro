@@ -136,6 +136,11 @@ class CERealmRepository : CERepositoryInterface {
         editCountry(ceCountry, ceCountry)
     }
 
+    override suspend fun clearAndSet(ceCountries: ArrayList<CECountry>) {
+        clear()
+        saveCountries(CEFakeRepository.countries)
+    }
+
     override suspend fun clear() {
         val realm = Realm.getDefaultInstance()
         try {

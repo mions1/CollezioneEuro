@@ -19,6 +19,7 @@ interface CEContract {
         fun saveCountries(ceCountries: ArrayList<CECountry>)
         fun getCountries()
         fun setOwned(ceCountry: CECountry, ceCoin: CECoin, owned: Boolean)
+        fun clearAndSet(ceCountries: ArrayList<CECountry>)
         fun clear()
     }
 

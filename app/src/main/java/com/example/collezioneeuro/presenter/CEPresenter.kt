@@ -65,6 +65,15 @@ class CEPresenter(
     }
 
     /**
+     * Pulisci il repository e inserisci le countries passate
+     */
+    override fun clearAndSet(ceCountries: ArrayList<CECountry>) {
+        launch {
+            repository.clearAndSet(ceCountries)
+        }
+    }
+
+    /**
      * Pulisci il repository
      */
     override fun clear() {

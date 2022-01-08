@@ -1356,11 +1356,15 @@ class CEFakeRepository : CERepositoryInterface {
         CERealmRepository().setOwned(ceCountry, ceCoin, owned)
     }
 
+    override suspend fun clearAndSet(ceCountries: ArrayList<CECountry>) {
+        clear()
+        countries.addAll(ceCountries)
+        saveCountries(countries)
+    }
+
     override suspend fun clear() {
         CERealmRepository().clear()
         countries.clear()
-        countries.addAll(getOriginalCountries())
-        saveCountries(countries)
     }
 
 }
