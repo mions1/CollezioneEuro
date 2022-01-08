@@ -11,5 +11,6 @@
     <string name="statistic_title_total_owned_coins">Totale monete possedute</string>
     <string name="bandiera_europa_contentdescription">Bandiera Europa</string>
     <string name="esporta_drawer_main_menu">Esporta</string>
+    <string name="importa_drawer_main_menu">Importa</string>
     <string name="toast_file_salvato_in">File salvato in</string>
 </resources>

@@ -4,7 +4,11 @@
     <group>
         <item
             android:id="@+id/dmExport"
-            android:icon="@drawable/import_export"
+            android:icon="@drawable/send_to_mobile"
             android:title="@string/esporta_drawer_main_menu" />
+        <item
+            android:id="@+id/dmImport"
+            android:icon="@drawable/system_update_alt"
+            android:title="@string/importa_drawer_main_menu" />
     </group>
 </menu>

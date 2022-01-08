@@ -11,5 +11,6 @@
     <string name="statistic_title_total_owned_coins">Total owned coins</string>
     <string name="bandiera_europa_contentdescription">Europe Flag</string>
     <string name="esporta_drawer_main_menu">Export</string>
+    <string name="importa_drawer_main_menu">Import</string>
     <string name="toast_file_salvato_in">File saved in</string>
 </resources>
