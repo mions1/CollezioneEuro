@@ -75,10 +75,10 @@ open class CEFileUtils {
          */
         fun getOpenFileIntent(): Intent {
             val intent = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
-                addCategory(Intent.CATEGORY_OPENABLE)
-                type = "text/json"
+                //addCategory(Intent.CATEGORY_OPENABLE)
+                type = "*/*"
             }
-            return intent
+            return Intent.createChooser(intent, null)
         }
 
         /* ---------------- Edit file ------------------ */
@@ -89,11 +89,10 @@ open class CEFileUtils {
         fun putTextIntoFile(activity: AppCompatActivity, uri: Uri, text: String) {
             try {
                 activity.contentResolver.openFileDescriptor(uri, "w")?.use {
-                    FileOutputStream(it.fileDescriptor).use {
-                        it.write(
-                            (text)
-                                .toByteArray()
-                        )
+                    FileOutputStream(it.fileDescriptor).use { fileOutputStream ->
+                        val outputStreamWriter = OutputStreamWriter(fileOutputStream)
+                        outputStreamWriter.append(text)
+                        outputStreamWriter.close()
                     }
                 }
             } catch (e: FileNotFoundException) {
