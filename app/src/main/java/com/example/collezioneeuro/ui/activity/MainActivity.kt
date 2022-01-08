@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
      * Gestione dei bottoni della bottom navigation
      */
     enum class BottomNavigationItem() {
-        HOME, STATISTICS
+        HOME, STATISTICS, COMPLETE
     }
 
     /**
@@ -92,6 +92,10 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
                     replaceFragmentToStatisticsFragment()
                     true
                 }
+                R.id.bnmCompletati -> {
+                    replaceFragmentToCompleteFragment()
+                    true
+                }
                 else -> false
             }
         }
@@ -99,13 +103,16 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
 
     /**
      * Imposta l'item indicato come attivo nella bottom navigation.
-     * Usato quando da un'altra tab fai "onBackPressed"
+     * Usato quando da un'altra tab (fragment) fai "onBackPressed".
+     * In quel fragment, chiami questo metodo impostando in quale tab andare
      */
     override fun setWhichItemIsSelectedBottomNavigationMenu(item: BottomNavigationItem) {
         when (item) {
             BottomNavigationItem.HOME -> binding.bottomNavigation.selectedItemId = R.id.bnmHome
             BottomNavigationItem.STATISTICS -> binding.bottomNavigation.selectedItemId =
                 R.id.bnmStatistiche
+            BottomNavigationItem.COMPLETE -> binding.bottomNavigation.selectedItemId =
+                R.id.bnmCompletati
         }
     }
 
@@ -117,6 +124,13 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         supportFragmentManager.beginTransaction()
             .addToBackStack(StatisticsFragment.TAG)
             .replace(binding.fragment.id, fragment, StatisticsFragment.TAG)
+            .commit()
+    }
+
+    private fun replaceFragmentToCompleteFragment() {
+        val fragment = HomeFragment.newInstance(true)
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragment.id, fragment, HomeFragment.TAG)
             .commit()
     }
 

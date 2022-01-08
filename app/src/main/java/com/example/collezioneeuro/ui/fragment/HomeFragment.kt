@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -33,9 +34,19 @@ class HomeFragment : Fragment(), CEContract.View, UpdateCountriesListener {
 
     private var ceCountries = ArrayList<CECountry>()
 
+    private var onlyCompleted = false // se si accede dalla bottom tab "completati"
+
     companion object {
         const val TAG = "HomeFragment"
-        fun newInstance(): HomeFragment = HomeFragment()
+
+        const val ARG_ONLY_COMPLETED = "ARG_ONLY_COMPLETED"
+
+        fun newInstance(onlyCompleted: Boolean = false): HomeFragment =
+            HomeFragment().apply {
+                val args = Bundle()
+                args.putBoolean(ARG_ONLY_COMPLETED, onlyCompleted)
+                arguments = args
+            }
     }
 
     override fun onAttach(context: Context) {
@@ -48,6 +59,10 @@ class HomeFragment : Fragment(), CEContract.View, UpdateCountriesListener {
         repository = CEFakeRepository.SingleInstance
         presenter = CEPresenter(RuntimeDispatcherProvider(), repository)
         presenter.bindView(this)
+
+        onlyCompleted = arguments?.getBoolean(ARG_ONLY_COMPLETED, false) == true
+
+        setOnBackPressed()
     }
 
     override fun onCreateView(
@@ -85,6 +100,8 @@ class HomeFragment : Fragment(), CEContract.View, UpdateCountriesListener {
     }
 
     private fun setRecyclerViewAdapter(countries: ArrayList<CECountry>) {
+        if (onlyCompleted)
+            countries.removeIf { it.getOwnedList().size < it.coins.size }
         binding.rvCountries.adapter =
             CountriesAdapter(countries, object : CountriesAdapter.OnClickListener {
                 override fun onClick(clicked: CECountry) {
@@ -125,6 +142,18 @@ class HomeFragment : Fragment(), CEContract.View, UpdateCountriesListener {
     override fun onUpdateCountries(ceCountries: ArrayList<CECountry>) {
         this.ceCountries = ceCountries
         setRecyclerViewAdapter(ceCountries)
+    }
+
+    private fun setOnBackPressed() {
+        // se siamo in onlyCompleted, quindi nella relativa tab, all'onBackPressed deve andare alla HOME
+        if (onlyCompleted)
+            activity?.onBackPressedDispatcher?.addCallback(
+                this,
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        activityParent.setWhichItemIsSelectedBottomNavigationMenu(MainActivity.BottomNavigationItem.HOME)
+                    }
+                })
     }
 
 }
