@@ -31,6 +31,14 @@ data class CECountry(
                 return find.second
             return ""
         }
+
+        /**
+         * Restituisce la country, trovandola tramite il tag, nella lista passata
+         */
+        fun getCountryByTag(ceCountries: ArrayList<CECountry>, tag: String): CECountry? {
+            return ceCountries.find { it.countryTag == tag }
+        }
+
     }
 
     fun getTotal(): Double {
@@ -49,6 +57,11 @@ data class CECountry(
     fun ownedCount(): Int {
         return coins.count { it.owned }
     }
+
+    fun getCoinByValue(value: Double): CECoin? {
+        return coins.find { it.value == value }
+    }
+
 }
 
 @Parcelize
