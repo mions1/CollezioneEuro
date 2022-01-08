@@ -13,4 +13,5 @@
     <string name="esporta_drawer_main_menu">Esporta</string>
     <string name="importa_drawer_main_menu">Importa</string>
     <string name="toast_file_salvato_in">File salvato in</string>
+    <string name="ce_bottom_navigation_menu_completati">Completati</string>
 </resources>

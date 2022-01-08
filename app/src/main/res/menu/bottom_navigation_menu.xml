@@ -9,4 +9,9 @@
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_sort_by_size"
         android:title="@string/ce_bottom_navigation_menu_statistiche" />
+    <item
+        android:id="@+id/bnmCompletati"
+        android:enabled="true"
+        android:icon="@drawable/verified"
+        android:title="@string/ce_bottom_navigation_menu_completati" />
 </menu>
