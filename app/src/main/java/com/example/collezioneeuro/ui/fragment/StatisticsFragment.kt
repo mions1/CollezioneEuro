@@ -20,6 +20,7 @@ import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
 import com.example.collezioneeuro.ui.activity.ActivityInterface
 import com.example.collezioneeuro.ui.activity.MainActivity
 import com.example.collezioneeuro.ui.adapter.StatisticsAdapter
+import kotlin.math.round
 
 data class Statistics(
     val title: String,
@@ -91,7 +92,7 @@ class StatisticsFragment : Fragment(), CEContract.View {
         return arrayListOf(
             Statistics(
                 "${getString(R.string.statistic_title_total_value_of_owned_coins)}:",
-                getTotalValue(countries).toString() + "€"
+                getStringTotalValue(countries) + " €"
             ),
             Statistics(
                 "${getString(R.string.statistic_title_total_owned_coins)}:",
@@ -111,7 +112,19 @@ class StatisticsFragment : Fragment(), CEContract.View {
      * Ritorna quanti soldi posseggo in base alle monete possedute
      */
     private fun getTotalValue(countries: ArrayList<CECountry>): Double {
-        return countries.sumOf { it.getTotal() }
+        return round((countries.sumOf { it.getTotal() } * 100) / 100)
+    }
+
+    /**
+     * Ritorna quanti soldi posseggo in base alle monete possedute
+     * e mette uno 0 se è il caso (ad es. se è 7.0 diventa 7.00, se è 7.1 diventa 7.10)
+     */
+    private fun getStringTotalValue(countries: ArrayList<CECountry>): String {
+        var total = round((countries.sumOf { it.getTotal() } * 100) / 100).toString()
+        if (total.substringAfter(".", "").length == 1) {
+            total += "0"
+        }
+        return total
     }
 
     private fun initRecyclerView() {
