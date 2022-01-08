@@ -289,8 +289,8 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
      */
     private val launchActivityCreateExportFile =
         registerForActivityResult(CreateFileActivityResultContract()) { result ->
-            val text = result.getStringExtra(CreateFileActivityResultContract.EXTRA_FILE_CONTENT)
-            result.data?.let { uri ->
+            val text = result?.getStringExtra(CreateFileActivityResultContract.EXTRA_FILE_CONTENT)
+            result?.data?.let { uri ->
                 text?.let { jsonText ->
                     ceExportFileUtils.writeExportedFile(uri, jsonText)
                     ceExportFileUtils.shareExportedFile(uri)
