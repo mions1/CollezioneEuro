@@ -14,10 +14,11 @@ import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.example.collezioneeuro.model.repository.CERepositoryInterface
 import com.example.collezioneeuro.presenter.CEPresenter
 import com.example.collezioneeuro.presenter.RuntimeDispatcherProvider
+import com.example.collezioneeuro.ui.activity.activityresultcontract.CreateFileActivityResultContract
 import com.example.collezioneeuro.ui.fragment.CoinsFragment
 import com.example.collezioneeuro.ui.fragment.HomeFragment
 import com.example.collezioneeuro.ui.fragment.StatisticsFragment
-import com.example.collezioneeuro.utils.fileutils.CEExportFileUtils
+import com.example.collezioneeuro.utils.fileutils.CEWrapperExportFileUtils
 import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsContract
 import com.example.collezioneeuro.utils.jsonutils.CEJsonUtilsPresenter
 
@@ -40,6 +41,8 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
     private lateinit var repository: CERepositoryInterface
     private lateinit var presenter: CEContract.Presenter
     private lateinit var jsonUtilsPresenter: CEJsonUtilsContract.Presenter
+
+    private val ceExportFileUtils = CEWrapperExportFileUtils(this)
 
     private val countries: ArrayList<CECountry> = ArrayList()
 
@@ -187,7 +190,7 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         binding.navView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.dmExport -> {
-                    shareExport()
+                    export()
                     Log.println(Log.DEBUG, "[MainActivity]", "[NavUi] - export pressed")
                     true
                 }
@@ -226,6 +229,32 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         }
     }
 
+    /* --------------- Gestione bottoni drawer ------------ */
+
+    /**
+     * Salva e condividi l'export
+     */
+    private fun export() {
+        closeDrawer()
+        showProgressBar()
+        jsonUtilsPresenter.getJsonCountries(countries)
+    }
+
+    /**
+     * Quando il json è pronto, nasconde la progress bar e lo esporta
+     */
+    override fun onGetJson(json: String) {
+        hideProgressBar()
+
+        launchActivityCreateExportFile.launch(
+            CreateFileActivityResultContract.newIntent(
+                ceExportFileUtils.saveExportFilePrivately(
+                    json
+                ), json
+            )
+        )
+    }
+
     /* --------------- Other methods ---------------------- */
 
     override fun onGetCountries(countries: ArrayList<CECountry>) {
@@ -245,24 +274,6 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         this.countries.addAll(countries)
     }
 
-    /**
-     * Quando il json è pronto, nasconde la progress bar e lo esporta
-     */
-    override fun onGetJson(json: String) {
-        val ceExportFileUtils = CEExportFileUtils(this)
-        hideProgressBar()
-        ceExportFileUtils.shareExportFile(json)
-    }
-
-    /**
-     * Salva e condividi l'export
-     */
-    private fun shareExport() {
-        closeDrawer()
-        showProgressBar()
-        jsonUtilsPresenter.getJsonCountries(countries)
-    }
-
     private fun showProgressBar() {
         binding.includeProgressBar.progressOverlay.visibility = View.VISIBLE
     }
@@ -271,4 +282,24 @@ class MainActivity : AppCompatActivity(), ActivityInterface, ActionBarActivityIn
         binding.includeProgressBar.progressOverlay.visibility = View.GONE
     }
 
+    /* --------------- OnActivityResult ------------------- */
+    /**
+     * Gestisce il ritorno dall'activity che salva il file json esportato.
+     * L'activity salva il file vuoto, dopo averlo salvato lo riempio e lo condivido
+     */
+    private val launchActivityCreateExportFile =
+        registerForActivityResult(CreateFileActivityResultContract()) { result ->
+            val text = result.getStringExtra(CreateFileActivityResultContract.EXTRA_FILE_CONTENT)
+            result.data?.let { uri ->
+                text?.let { jsonText ->
+                    ceExportFileUtils.writeExportedFile(uri, jsonText)
+                    ceExportFileUtils.shareExportedFile(uri)
+                    Log.println(
+                        Log.DEBUG,
+                        "[MainActivity]",
+                        "[onActivityResult] [createExportFile] - $uri $jsonText"
+                    )
+                }
+            }
+        }
 }
