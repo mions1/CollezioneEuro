@@ -96,7 +96,7 @@ class CountriesAdapter(
 
             shimmeredFrameLayout.visibility = View.VISIBLE
             noshimmeredLayout.visibility = View.GONE
-            shimmeredFrameLayout.startShimmerAnimation()
+            shimmeredFrameLayout.startShimmer()
         }
 
         /**
@@ -109,7 +109,7 @@ class CountriesAdapter(
             val shimmeredFrameLayout = binding.shimmerFrameLayout
             val noshimmeredLayout = binding.llCountryCard
 
-            shimmeredFrameLayout.stopShimmerAnimation()
+            shimmeredFrameLayout.stopShimmer()
             shimmeredFrameLayout.visibility = View.GONE
             noshimmeredLayout.visibility = View.VISIBLE
         }

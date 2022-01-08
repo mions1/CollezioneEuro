@@ -101,7 +101,7 @@ class CoinsAdapter(
 
             shimmeredFrameLayout.visibility = View.VISIBLE
             noShimmeredLayout.visibility = View.GONE
-            shimmeredFrameLayout.startShimmerAnimation()
+            shimmeredFrameLayout.startShimmer()
         }
 
         /**
@@ -114,7 +114,7 @@ class CoinsAdapter(
             val shimmeredFrameLayout = binding.shimmerFrameLayout
             val noshimmeredLayout = binding.llCoinCard
 
-            shimmeredFrameLayout.stopShimmerAnimation()
+            shimmeredFrameLayout.stopShimmer()
             shimmeredFrameLayout.visibility = View.GONE
             noshimmeredLayout.visibility = View.VISIBLE
         }
