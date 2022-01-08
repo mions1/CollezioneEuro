@@ -4,7 +4,6 @@ import com.example.collezioneeuro.model.CECountry
 import com.example.collezioneeuro.presenter.DispatcherProvider
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
@@ -30,8 +29,17 @@ class CEJsonUtilsPresenter(
     override fun getJsonCountries(countries: ArrayList<CECountry>) {
         launch {
             val json = CEJsonUtils.getJsonCountries(countries)
-            delay(10000)
             view?.onGetJson(json)
+        }
+    }
+
+    /**
+     * Legge il json file e crea la lista delle countries dal json letto
+     */
+    override fun readCountryJson(countryJson: String) {
+        launch {
+            val countries = CEJsonUtils.readCountryJson(countryJson)
+            view?.onReadJson(countries)
         }
     }
 

@@ -1,8 +1,11 @@
 package com.example.collezioneeuro.utils.jsonutils
 
 import android.util.Log
+import com.example.collezioneeuro.model.CECoin
 import com.example.collezioneeuro.model.CECountry
+import com.example.collezioneeuro.model.repository.CEFakeRepository
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 
 class CEJsonUtils {
 
@@ -21,6 +24,46 @@ class CEJsonUtils {
                 "[Export] - ${countryJson.subSequence(0, 50)}"
             )
             return countryJson
+        }
+
+        /**
+         * Leggo il json e restituisco la lista delle countries del json appena letto
+         */
+        fun readCountryJson(countryJson: String): ArrayList<CECountry> {
+            val countries = mapper.readValue<ArrayList<JsonCountry>>(countryJson)
+            val ceCountries = mapJsonCountriesToCountries(countries)
+            Log.println(
+                Log.DEBUG,
+                "[ExportUserSavedCountries]",
+                "[Export] - $ceCountries"
+            )
+            return ceCountries
+        }
+
+        /**
+         * Mappa le JSonCountries in CECountries. Quindi, alle jsoncountries che tengono solo alcune
+         * informazioni, aggiungo le restanti prese dal repo
+         * Ad esempio, mi serve prendere:
+         *  - drawableID
+         *  - drawableUri
+         *  - flagUri
+         */
+        private fun mapJsonCountriesToCountries(jsonCountries: ArrayList<JsonCountry>): ArrayList<CECountry> {
+            val tmpCECountries = CEFakeRepository.getOriginalCountries()
+            val ceCountries = ArrayList<CECountry>()
+            for (jsonCountry in jsonCountries) {
+                val ceCoins = ArrayList<CECoin>()
+                val tmpCECountry = CECountry.getCountryByTag(tmpCECountries, jsonCountry.countryTag)
+                for (coin in jsonCountry.coins) {
+                    val tmpCoin = tmpCECountry?.getCoinByValue(coin.value)
+                    tmpCoin?.owned = coin.owned
+                    tmpCoin?.let { ceCoins.add(it) }
+                }
+                tmpCECountry?.coins?.clear()
+                tmpCECountry?.coins?.addAll(ceCoins)
+                tmpCECountry?.let { ceCountries.add(it) }
+            }
+            return ceCountries
         }
 
         /**
